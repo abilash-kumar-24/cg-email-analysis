@@ -47,7 +47,7 @@
         <div class="text-sm text-slate-400 space-y-4 leading-relaxed">
             <p>Welcome to the <span class="text-white font-semibold">Tudor Transparency Ledger</span>. This interface operates as an empirical, data-driven archive tracking communication trails, systemic administrative blockages, and outstanding civil requirements within the Casagrand Tudor ecosystem.</p>
             <p><strong class="text-amber-400 font-semibold uppercase font-mono text-xs block mb-1">⚠ Verification Framework:</strong>
-            All analytics are derived exclusively from a formal audit of <span class="text-white font-semibold">500 owner-initiated emails</span> across <span class="text-white font-semibold">174 documented conversation threads</span> spanning May 2024 – May 2026. Individual Casagrand staff identities are aliased (staff1, staff2…) to protect privacy.</p>
+            All analytics are derived exclusively from a formal audit of <span class="text-white font-semibold">500 owner-initiated emails</span> across <span class="text-white font-semibold">174 documented conversation threads</span> spanning May 2024 – May 2026. Individual Casagrand staff identities are aliased (staff01, staff02…) to protect privacy.</p>
             <p>This dashboard is structured entirely for objective transparency, informational accuracy, and resident civic awareness. Users are encouraged to cross-verify specific entries against their own documentation.</p>
         </div>
         <div class="pt-4 border-t border-slate-900 flex justify-end">
@@ -109,6 +109,7 @@
             <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Owner Emails Filed</div>
             <div class="text-4xl font-bold tracking-tight text-amber-400 font-mono">500</div>
             <p class="text-xs text-slate-400">Formal emails sent by owners across 174 conversation threads, June 2024 – May 2026.</p>
+            <p class="text-[10px] text-slate-500 leading-relaxed pt-1">In plain terms: residents formally wrote to the builder an average of once every 1.4 days for two years — raising documented concerns across 11 infrastructure categories.</p>
             <div class="pt-2 border-t border-slate-900 text-[10px] font-mono text-slate-600 space-y-0.5">
                 <div>First email: <span class="text-slate-400">05 Jun 2024</span></div>
                 <div>Last email: <span class="text-slate-400">23 May 2026</span></div>
@@ -116,33 +117,36 @@
             </div>
         </div>
         <div class="glass-panel border border-red-900/30 rounded-2xl p-6 space-y-2">
-            <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Casagrand Formal Replies</div>
-            <div class="text-4xl font-bold tracking-tight text-red-500 font-mono">3</div>
-            <p class="text-xs text-slate-400">Total emails from @casagrand.co.in across 24 months — all 3 in a single 3-day window (Jun 5–7, 2024). Zero since.</p>
+            <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Casagrand Documented Replies</div>
+            <div class="text-4xl font-bold tracking-tight text-red-500 font-mono">51</div>
+            <p class="text-xs text-slate-400">Total documented responses from Casagrand across 24 months — 3 sent directly from @casagrand.co.in, and 48 via the owners' Google Groups reply thread.</p>
+            <p class="text-[10px] text-slate-500 leading-relaxed pt-1">In plain terms: out of 500 formal owner emails, Casagrand replied 51 times — roughly 1 response for every 10 emails. Only 14 of 67 unique staff ever replied at all.</p>
             <div class="pt-2 border-t border-slate-900 text-[10px] font-mono text-slate-600 space-y-0.5">
-                <div>Only thread replied: <span class="text-slate-400">THREAD-0001</span></div>
-                <div>Last CG email: <span class="text-slate-400">07 Jun 2024</span></div>
-                <div>Silence since: <span class="text-red-400">719 days</span></div>
+                <div>Direct @casagrand.co.in replies: <span class="text-slate-400">3 (Jun 2024 only)</span></div>
+                <div>Via Google Groups thread: <span class="text-slate-400">48 (Jul 2024 – Apr 2026)</span></div>
+                <div>Unique staff who replied: <span class="text-emerald-500">14</span> of <span class="text-slate-400">67 total</span></div>
             </div>
         </div>
         <div class="glass-panel border border-red-900/30 rounded-2xl p-6 space-y-2">
-            <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Threads Without CG Response</div>
+            <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Threads Without Direct CG Reply</div>
             <div class="text-4xl font-bold tracking-tight text-red-600 font-mono">144/145</div>
-            <p class="text-xs text-slate-400">99.3% of owner-initiated threads received zero reply from any @casagrand.co.in address.</p>
+            <p class="text-xs text-slate-400">99.3% of owner-initiated threads received zero reply from any @casagrand.co.in address directly. (Some threads received replies via shared Google Groups.)</p>
+            <p class="text-[10px] text-slate-500 leading-relaxed pt-1">In plain terms: of 145 distinct email conversations started by owners, only 1 ever received a formal reply from a Casagrand @casagrand.co.in email address. The other 144 conversations were left without any direct response.</p>
             <div class="pt-2 border-t border-slate-900 text-[10px] font-mono text-slate-600 space-y-0.5">
                 <div>Total threads in DB: <span class="text-slate-400">174</span></div>
                 <div>Owner-initiated: <span class="text-slate-400">145</span></div>
-                <div>CG replied: <span class="text-emerald-500">1</span> &nbsp;|&nbsp; Unanswered: <span class="text-red-400">144</span></div>
+                <div>Direct CG reply: <span class="text-emerald-500">1</span> &nbsp;|&nbsp; No direct reply: <span class="text-red-400">144</span></div>
             </div>
         </div>
         <div class="glass-panel border border-slate-900 rounded-2xl p-6 space-y-2">
             <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">CG Staff Emailed</div>
-            <div class="text-4xl font-bold tracking-tight text-purple-400 font-mono">64</div>
-            <p class="text-xs text-slate-400">Unique Casagrand staff who received owner emails — 3,644 total individual email instances.</p>
+            <div class="text-4xl font-bold tracking-tight text-purple-400 font-mono">67</div>
+            <p class="text-xs text-slate-400">Unique Casagrand email addresses (staff + role desks) that received owner emails — 5,493 total To/CC instances across 779 emails in the audit.</p>
+            <p class="text-[10px] text-slate-500 leading-relaxed pt-1">In plain terms: 67 different people and desks at Casagrand were formally contacted. Despite this broad outreach, only 14 ever sent any reply — the other 53 sent zero responses across the full 2-year period.</p>
             <div class="pt-2 border-t border-slate-900 text-[10px] font-mono text-slate-600 space-y-0.5">
-                <div>Staff who replied: <span class="text-slate-400">2 (once each, Jun 2024)</span></div>
-                <div>Staff with 0 replies: <span class="text-red-400">62</span></div>
-                <div>With attachments: <span class="text-slate-400">139/500 emails (28%)</span></div>
+                <div>Staff who replied (any method): <span class="text-emerald-500">14</span></div>
+                <div>Staff with 0 replies: <span class="text-red-400">53</span></div>
+                <div>Emails with attachments: <span class="text-slate-400">139/500 (28%)</span></div>
             </div>
         </div>
     </section>
@@ -171,77 +175,76 @@
                 <div class="bg-slate-950/60 border border-slate-900 rounded-2xl p-5 space-y-3">
                     <p class="text-[10px] font-mono uppercase text-slate-500 tracking-wider">Key Facts From The Audit Record</p>
                     <ul class="space-y-2.5 text-xs text-slate-400 leading-relaxed">
-                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span>All 3 Casagrand replies were in a single thread in June 2024 (June 5–7). Zero @casagrand.co.in emails recorded after June 7, 2024.</li>
-                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">md@casagrand.co.in</span> received 305 owner emails across the audit period. Zero replies on record.</li>
-                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">escalationdesk@casagrand.co.in</span> received 148 escalation emails. Zero replies on record.</li>
-                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">icare@casagrand.co.in</span> received 142 emails. Zero replies from this address on record.</li>
-                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span>64 unique Casagrand staff received owner emails (3,644 instances total). Only 2 staff members responded — once each — in June 2024.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span>51 total Casagrand responses documented: 3 sent directly from @casagrand.co.in (all Jun 5–7, 2024), and 48 sent via the owners' Google Groups reply chain (Jul 2024 – Apr 2026). That is approximately 1 reply per 10 owner emails sent.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">md@casagrand.co.in</span> (Managing Director's desk) received <span class="text-white font-semibold">341</span> owner emails — the most senior point of escalation. Zero direct replies on record across the full 2-year audit.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">escalationdesk@casagrand.co.in</span> received <span class="text-white font-semibold">206</span> escalation emails specifically addressed to the escalation desk. Zero direct replies on record.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">icare@casagrand.co.in</span> (customer care) received <span class="text-white font-semibold">225</span> owner emails. Zero direct replies from this address on record.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span>67 unique Casagrand staff/role addresses received owner emails — 5,493 total instances. 14 of 67 ever replied. The most active replier (staff04) sent 14 responses; 53 staff sent zero across the entire 2-year period.</li>
                     </ul>
                 </div>
             </div>
             <!-- Right: top recipients table -->
             <div class="space-y-3">
-                <div class="text-xs font-mono uppercase text-slate-500 tracking-wider">Top 10 Casagrand Recipients — Emails Received</div>
+                <div class="text-xs font-mono uppercase text-slate-500 tracking-wider">Top 10 Casagrand Recipients — Emails Received (corrected from audit)</div>
+                <p class="text-[10px] text-slate-500">"Emails received" = number of owner emails where that address appeared in To or CC. "Replies" = all documented responses including via Google Groups thread.</p>
                 <div class="space-y-1.5 text-xs font-mono">
-                    <!-- header -->
                     <div class="grid grid-cols-12 gap-2 text-[9px] uppercase text-slate-600 font-bold px-3 pb-1 border-b border-slate-900">
                         <div class="col-span-7">Recipient</div>
                         <div class="col-span-3 text-right">Emails Received</div>
-                        <div class="col-span-2 text-center">Reply</div>
+                        <div class="col-span-2 text-center">Replies</div>
                     </div>
-                    <!-- rows -->
                     <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">staff1@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">417</div>
+                        <div class="col-span-7 text-slate-300">staff01@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">652</div>
+                        <div class="col-span-2 text-center text-emerald-500 font-bold">2</div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff02@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">438</div>
+                        <div class="col-span-2 text-center text-emerald-500 font-bold">1</div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff03@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">363</div>
                         <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
                     <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
                         <div class="col-span-7 text-slate-300">md@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">305</div>
+                        <div class="col-span-3 text-right text-amber-400">341</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-emerald-950/10 rounded-lg px-3 py-2 border border-emerald-900/20">
+                        <div class="col-span-7 text-slate-300">staff04@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">339</div>
+                        <div class="col-span-2 text-center text-emerald-400 font-bold">14</div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff05@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">281</div>
+                        <div class="col-span-2 text-center text-emerald-500 font-bold">4</div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff06@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">253</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-emerald-950/10 rounded-lg px-3 py-2 border border-emerald-900/20">
+                        <div class="col-span-7 text-slate-300">staff07@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">225</div>
+                        <div class="col-span-2 text-center text-emerald-400 font-bold">11</div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">icare@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">225</div>
                         <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
                     <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">staff2@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">274</div>
-                        <div class="col-span-2 text-center text-red-500">0</div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">staff3@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">241</div>
-                        <div class="col-span-2 text-center text-red-500">0</div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">staff4@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">238</div>
-                        <div class="col-span-2 text-center text-red-500">0</div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">staff5@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">184</div>
-                        <div class="col-span-2 text-center text-red-500">0</div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">staff6@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">173</div>
-                        <div class="col-span-2 text-center text-red-500">0</div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">staff7@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">168</div>
-                        <div class="col-span-2 text-center text-red-500">0</div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">staff8@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">165</div>
-                        <div class="col-span-2 text-center text-red-500">0</div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
-                        <div class="col-span-7 text-slate-300">escalationdesk@casagrand.co.in</div>
-                        <div class="col-span-3 text-right text-amber-400">148</div>
-                        <div class="col-span-2 text-center text-red-500">0</div>
+                        <div class="col-span-7 text-slate-300">staff08@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">220</div>
+                        <div class="col-span-2 text-center text-emerald-500 font-bold">2</div>
                     </div>
                 </div>
-                <p class="text-[10px] text-slate-600 font-mono pt-1">Full 64-recipient breakdown available in <a href="escalations.html" class="text-slate-400 hover:text-white underline">Escalations →</a></p>
+                <p class="text-[10px] text-slate-600 font-mono pt-1">Full 67-recipient breakdown with all reply counts available in <a href="escalations.html" class="text-slate-400 hover:text-white underline">Escalations →</a></p>
             </div>
         </div>
     </section>
