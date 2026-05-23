@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#030712] text-slate-100 antialiased scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudor Transparency Ledger | Delay Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans:['Inter','sans-serif'],
+                        display:['Cabinet Grotesk','sans-serif'],
+                        mono:['JetBrains Mono','monospace']
+                    },
+                    animation:{'pulse-slow':'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite'}
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar{width:6px;height:6px}
+        ::-webkit-scrollbar-track{background:#030712}
+        ::-webkit-scrollbar-thumb{background:#1f2937;border-radius:9999px}
+        .glass-panel{background:rgba(10,15,30,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+        .mc{width:100%;height:36px;border-radius:4px;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+        .mc:hover{transform:scale(1.15) translateY(-3px);z-index:30;box-shadow:0 20px 25px -5px rgba(0,0,0,0.7)}
+        .e{background:rgba(15,23,42,0.4);border:1px solid #020617}
+        .u{background:rgba(69,10,10,0.4);border:1px solid rgba(153,27,27,0.2)}
+        .s{background:#b45309}
+        .m{background:#d97706}
+        .a{background:#dc2626}
+        .h{background:#b91c1c}
+        .w{background:#059669}
+    </style>
+</head>
+<body class="min-h-screen pb-40 selection:bg-red-500/30 selection:text-red-300">
+<div class="w-full h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-red-600"></div>
+
+<nav class="sticky top-0 z-50 bg-[#030712]/80 backdrop-blur-md border-b border-gray-900/60 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse-slow"></span>
+            <span class="text-xs font-mono tracking-widest uppercase text-slate-400">Tudor Transparency Ledger</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs font-mono">
+            <a href="index.html" class="text-slate-400 hover:text-white transition">Overview</a>
+            <a href="matrix.html" class="text-white font-bold border-b border-red-500 pb-0.5">Delay Matrix</a>
+            <a href="escalations.html" class="text-slate-400 hover:text-white transition">Escalations</a>
+            <a href="pillars.html" class="text-slate-400 hover:text-white transition">Infrastructure Pillars</a>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-6 mt-12 sm:mt-16 space-y-10">
+
+    <header class="space-y-2 max-w-3xl">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-md font-mono">24-Month Issue Activity Matrix</span>
+        <h1 class="text-3xl sm:text-5xl font-black font-display tracking-tight text-white">Systemic Delay &amp; Horizon Matrix</h1>
+        <p class="text-sm text-slate-400">Coverage: June 2024 – May 2026 (24 months, 11 infrastructure strands). Each cell represents documented owner email activity in that category and month. Hover to decode.</p>
+    </header>
+
+    <section class="glass-panel border border-slate-900/60 rounded-3xl p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+            <div id="heatmap-reader" class="bg-slate-950/80 px-4 py-2.5 rounded-xl border border-slate-800 text-xs text-slate-400 font-mono min-w-[360px] text-center shadow-inner transition-all duration-200">
+                Hover over a matrix cell to decode the data record
+            </div>
+        </div>
+
+        <div class="overflow-x-auto pt-2">
+            <div id="matrixGrid" class="min-w-[1200px] space-y-2.5 pb-2"></div>
+        </div>
+
+        <!-- Legend -->
+        <div class="flex flex-wrap items-center justify-end gap-5 text-[10px] uppercase font-bold font-mono pt-3 border-t border-slate-900/50 text-slate-500">
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded e inline-block"></span>No Activity</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded u inline-block"></span>Unanswered (1–2 emails)</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded s inline-block"></span>Stalling (3–7 emails)</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded m inline-block"></span>Significant (8–14 emails)</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded a inline-block"></span>Active (15+ emails)</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded h inline-block"></span>Safety Incident</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded w inline-block"></span>Written Admission</div>
+        </div>
+    </section>
+</main>
+
+<script>
+    const months = [
+        "JUN'24","JUL'24","AUG'24","SEP'24","OCT'24","NOV'24","DEC'24",
+        "JAN'25","FEB'25","MAR'25","APR'25","MAY'25","JUN'25",
+        "JUL'25","AUG'25","SEP'25","OCT'25","NOV'25","DEC'25",
+        "JAN'26","FEB'26","MAR'26","APR'26","MAY'26"
+    ];
+
+    // colors: e=empty, u=unanswered(1-2), s=stalling(3-7), m=moderate(8-14), a=active(15+), h=hazard/safety, w=written admission
+    const strands = [
+        {
+            label: "1. Water Infrastructure",
+            cells: ['s','m','w','u','s','e','e','s','s','u','a','m','a','m','m','a','m','s','s','e','u','s','u','e'],
+            tips:  [
+                "JUN'24: WTP Blueprint Discrepancies — 3 owner emails, 0 responses",
+                "JUL'24: Carbon Filtration Omissions Traced & Formally Filed — 8 emails",
+                "AUG'24: Written Admission — 4 of 7 Borewells Defective, TDS 1,250",
+                "SEP'24: 1 Follow-Up Email on Borewell TDS | 0 Responses",
+                "OCT'24: 4 Water Issue Emails Filed | 0 Responses",
+                "","",
+                "JAN'25: Water Line Cross-Contamination Warning Escalated — 5 emails",
+                "FEB'25: 6 Water-Related Emails | 0 Responses",
+                "MAR'25: 2 Follow-Up Emails on WTP Status",
+                "APR'25: 18 Owner Emails on Water Issues | 0 Responses",
+                "MAY'25: 14 Water-Related Filings | 0 Responses",
+                "JUN'25: 23 Emails — OHT/Sump Cleaning, Flush Water, Contamination",
+                "JUL'25: 8 Water-Related Emails Filed",
+                "AUG'25: 8 Water-Related Emails Filed",
+                "SEP'25: 20 Emails — WTP, TDS, Water Quality | 0 Responses",
+                "OCT'25: 14 Water-Related Emails Filed",
+                "NOV'25: 4 Water Emails Filed",
+                "DEC'25: 4 Water Follow-Up Emails",
+                "",
+                "FEB'26: 1 Follow-Up on Water Quality",
+                "MAR'26: 3 Water-Related Emails Filed",
+                "APR'26: 2 Water Emails Filed",
+                ""
+            ]
+        },
+        {
+            label: "2. Power Grid & DG",
+            cells: ['e','e','e','e','s','s','e','s','s','s','u','u','u','s','s','u','u','e','e','e','s','u','e','e'],
+            tips:  [
+                "","","","",
+                "OCT'24: Builder Notification — TNEB Substation Transformer Deferred",
+                "NOV'24: Mandatory DG Fuel Charges Imposed on Residents",
+                "",
+                "JAN'25: 3 EB Connection & Solar Update Emails Filed",
+                "FEB'25: 7 Emails — Frequent Power Outage, Voltage Issues",
+                "MAR'25: 5 Grid-Related Emails | 0 Responses",
+                "APR'25: 1 Electrical Email Filed",
+                "MAY'25: 1 Electrical Email Filed",
+                "JUN'25: 2 Electrical Emails Filed",
+                "JUL'25: 4 Electrical Emails Filed",
+                "AUG'25: 3 Electrical Emails Filed",
+                "SEP'25: 1 Electrical Email Filed",
+                "OCT'25: 1 Electrical Email Filed",
+                "","","",
+                "FEB'26: 7 Electrical Emails Filed | 0 Responses",
+                "MAR'26: 1 Electrical Email Filed",
+                "",""
+            ]
+        },
+        {
+            label: "3. Elevator Safety",
+            cells: ['e','h','u','e','e','e','e','u','s','e','e','u','m','e','u','s','e','u','u','e','e','e','s','e'],
+            tips:  [
+                "",
+                "JUL'24: Block C ARD Failure — Emergency Shaft Trap Incident",
+                "AUG'24: Holding Template Issued for Lift Load Calibration | No Technical Follow-up",
+                "","","","",
+                "JAN'25: 1 Elevator Email — Missing Safety Certificates & Block F Drops",
+                "FEB'25: B-Block Lift Issues, Mirrors, Cleaning — 3 Emails Filed",
+                "",
+                "",
+                "MAY'25: 1 Elevator Email — Lift Malfunction Across Blocks",
+                "JUN'25: 12 Emails — Life-Threatening B-Block Lift Issue Escalated",
+                "",
+                "AUG'25: 1 Elevator Email Filed",
+                "SEP'25: 3 Elevator Emails Filed",
+                "",
+                "NOV'25: 2 Elevator Emails Filed",
+                "DEC'25: 1 Elevator Email Filed",
+                "","","",
+                "APR'26: 4 Elevator Emails Filed | 0 Responses",
+                ""
+            ]
+        },
+        {
+            label: "4. Solar Arrays",
+            cells: ['e','e','e','u','s','e','e','u','e','e','e','e','e','e','e','e','e','e','e','e','e','e','u','e'],
+            tips:  [
+                "","","",
+                "SEP'24: kW Deficit Assessment Filed — Solar Output vs Promised Spec",
+                "OCT'24: Common Area Solar Generation Shortfall Formally Raised",
+                "","",
+                "JAN'25: 1 EB & Solar Update Email Filed",
+                "","","","","","","","","","","","","","",
+                "APR'26: Photovoltaic Procurement Shortfall Copied to Legal Notice",
+                ""
+            ]
+        },
+        {
+            label: "5. Parking Deliverables",
+            cells: ['a','u','e','s','e','u','u','s','e','s','u','m','m','u','u','m','m','u','u','e','s','u','e','u'],
+            tips:  [
+                "JUN'24: Allocation Boundary Violations & Width Deficiencies Discovered",
+                "JUL'24: 1 Parking Email Filed",
+                "",
+                "SEP'24: Low Ceiling Clearance & Basement Water Pooling Logged",
+                "",
+                "NOV'24: 1 Parking Email Filed",
+                "DEC'24: F-Block Car Parking Internal Meeting Arranged",
+                "JAN'25: Driveway Crack Vectors & Pillar Obstruction Claims",
+                "",
+                "MAR'25: 5 Parking Emails — Allotment Letters, F-Block Access",
+                "APR'25: 1 Parking Email Filed",
+                "MAY'25: 6 Parking Emails — Allotment Status Updates Requested",
+                "JUN'25: 8 Parking Emails — Allotment, Snake Sighting in Parking",
+                "JUL'25: 2 Parking Emails Filed",
+                "AUG'25: 1 Parking Email Filed",
+                "SEP'25: 13 Parking Emails — Allocation & Lumber Room Follow-Ups",
+                "OCT'25: 12 Parking Emails Filed | 0 Responses",
+                "NOV'25: 2 Parking Emails Filed",
+                "DEC'25: 2 Parking Emails Filed",
+                "",
+                "FEB'26: 3 Parking Emails Filed",
+                "MAR'26: 2 Parking Emails Filed",
+                "",
+                "MAY'26: 1 Parking Email — Missing Cycle Racks & Stilt Grano Flooring"
+            ]
+        },
+        {
+            label: "6. Common Amenities",
+            cells: ['e','e','e','a','e','s','e','u','e','u','e','e','e','e','e','e','e','u','u','u','u','u','e','u'],
+            tips:  [
+                "","","",
+                "SEP'24: Unfinished Clubhouse Interiors & Uncertified Play Equipment Filed",
+                "",
+                "NOV'24: Pool Filtration Failures & CCTV Security Omissions Logged",
+                "",
+                "JAN'25: Block Lobby Entrance Concerns Filed",
+                "",
+                "MAR'25: 2 Amenities-Related Emails Filed",
+                "","","","","","","",
+                "NOV'25: Clubhouse Inauguration Meeting Request Filed",
+                "DEC'25: Water Dripping Below Swimming Pool — Critical Alert",
+                "JAN'26: MyGate Amenities Access Issue Raised",
+                "FEB'26: Follow-Up on MyGate Amenities Option",
+                "MAR'26: 2 Amenities Emails Filed",
+                "",
+                "MAY'26: Missing Cycle Racks, Lobby Spaces, Stilt Flooring — Formal Notice"
+            ]
+        },
+        {
+            label: "7. Civil Defects",
+            cells: ['u','e','e','e','e','e','e','s','s','u','e','e','u','s','e','s','s','u','e','e','e','e','e','u'],
+            tips:  [
+                "JUN'24: Core Wall Fractures & Walkway Masonry Faults Lodged",
+                "","","","","","",
+                "JAN'25: Concrete Structural Seepage Passes 360-Day Latency Line",
+                "FEB'25: 142 System Tickets Marked Closed Without Field Repairs",
+                "MAR'25: 1 Civil Defect Email Filed",
+                "","",
+                "JUN'25: 2 Civil Defect Emails Filed",
+                "JUL'25: 3 Civil Defect Emails Filed",
+                "",
+                "SEP'25: Rainwater Seepage, Drainage & RWH Issues Formally Raised",
+                "OCT'25: 7 Civil Defect Emails — Seepage, Drainage Follow-Ups",
+                "NOV'25: 1 Civil Defect Email Filed",
+                "","","","","",
+                "MAY'26: 1 Civil Defect Email Filed — Failed Commitments Formal Notice"
+            ]
+        },
+        {
+            label: "8. Statutory Compliance",
+            cells: ['e','e','e','e','u','e','e','s','u','s','e','u','m','m','m','a','s','u','u','u','u','s','s','e'],
+            tips:  [
+                "","","","",
+                "OCT'24: 1 Compliance Email Filed",
+                "","",
+                "JAN'25: IFM, AOA, STP — 5 Compliance Emails Filed",
+                "FEB'25: 1 Compliance Email Filed",
+                "MAR'25: 3 Compliance Emails — STP, PNG, IFM",
+                "",
+                "MAY'25: 1 Compliance Email — Water Stagnation Near STP",
+                "JUN'25: 6 Compliance Emails — IFM Deferral, AOA Notices",
+                "JUL'25: 12 Emails — Apartment Handover Delays (B711, G506)",
+                "AUG'25: 8 Compliance Emails — IFM & Handover",
+                "SEP'25: 16 Compliance Emails — AOA Formation Final Notice",
+                "OCT'25: 4 Compliance Emails Filed",
+                "NOV'25: 1 Compliance Email Filed",
+                "DEC'25: 2 Compliance Emails Filed",
+                "JAN'26: 1 Compliance Email Filed",
+                "FEB'26: 1 Compliance Email Filed",
+                "MAR'26: 3 Compliance Emails Filed",
+                "APR'26: 200+ Signed Maintenance Deferral Notice to MD; SRO Misdirection Challenged",
+                ""
+            ]
+        },
+        {
+            label: "9. Fire & Safety Hazards",
+            cells: ['e','e','e','e','e','e','e','e','e','e','e','u','e','e','e','e','h','h','u','e','e','e','e','e'],
+            tips:  [
+                "","","","","","","","","","","",
+                "MAY'25: Health Hazard — Millenia DG Exhaust Fumes Formally Filed",
+                "","","","",
+                "OCT'25: Re-escalation — DG Exhaust Fumes Health Hazard | No Response",
+                "NOV'25: Urgent Clarification — Fire Incident in C Block Formally Raised",
+                "DEC'25: 1 Safety Follow-Up Email Filed",
+                "","","","",""
+            ]
+        },
+        {
+            label: "10. Security & Surveillance",
+            cells: ['e','e','e','e','e','e','e','e','e','u','e','e','u','e','u','u','u','u','u','u','u','e','u','e'],
+            tips:  [
+                "","","","","","","","","",
+                "MAR'25: Dog Menace Reported — Stray Animal Access Concern",
+                "",
+                "",
+                "JUN'25: Snake Sighting in Car Parking — Preventive Measures Requested",
+                "",
+                "AUG'25: Security Breach & Violent Incident — Immediate Action Requested",
+                "SEP'25: Stray Dog Attack & Accessibility Violation Formally Filed",
+                "OCT'25: 2 Security Emails — CCTV & Safety Measures",
+                "NOV'25: Mosquito & Snake Control Measures Requested",
+                "DEC'25: 1 Security Follow-Up Email",
+                "JAN'26: 1 Security Email Filed",
+                "FEB'26: 1 Security Email Filed",
+                "",
+                "APR'26: 1 Security Email Filed",
+                ""
+            ]
+        },
+        {
+            label: "11. Governance (AOA/IFM)",
+            cells: ['m','s','s','s','m','m','u','a','s','a','m','m','a','a','s','s','m','s','s','u','m','s','u','u'],
+            tips:  [
+                "JUN'24: 6 Governance Emails — Project Status & Owner Meetings",
+                "JUL'24: 5 Governance Emails — Meeting Agendas",
+                "AUG'24: 5 Emails — Project Delay Meeting, Aug 31 Agenda",
+                "SEP'24: 4 Governance Emails Filed",
+                "OCT'24: 9 Emails — Saturday Meeting MOM, Hardship Requests",
+                "NOV'24: 6 Governance Emails Filed",
+                "DEC'24: 1 Governance Email Filed",
+                "JAN'25: 18 Emails — IFM, AOA, Compliance Coordination",
+                "FEB'25: 4 Governance Emails Filed",
+                "MAR'25: 16 Emails — IFM Deferral, Meeting Requests",
+                "APR'25: 12 Governance Emails — IFM Queries, Infrastructure Pre-conditions",
+                "MAY'25: 15 Governance Emails — IFM Takeover Conditions",
+                "JUN'25: 27 Emails — Peak Governance Activity, AOA Formation Notices",
+                "JUL'25: 16 Governance Emails Filed",
+                "AUG'25: 4 Governance Emails Filed",
+                "SEP'25: 4 Governance Emails Filed",
+                "OCT'25: 9 Governance Emails — AOA, IFM Follow-Ups",
+                "NOV'25: 4 Governance Emails Filed",
+                "DEC'25: 5 Governance Emails Filed",
+                "JAN'26: 1 Governance Email Filed",
+                "FEB'26: 6 Governance Emails Filed",
+                "MAR'26: 5 Governance Emails Filed",
+                "APR'26: 2 Governance Emails Filed",
+                "MAY'26: 1 Governance Email Filed"
+            ]
+        }
+    ];
+
+    const labelW = 180;
+    const cellW  = 44;
+    const cellH  = 36;
+    const gap    = 6;
+
+    function buildMatrix() {
+        const grid = document.getElementById('matrixGrid');
+        const reader = document.getElementById('heatmap-reader');
+
+        // Header row
+        const headerRow = document.createElement('div');
+        headerRow.style.cssText = `display:flex;gap:${gap}px;align-items:center;padding-bottom:10px;border-bottom:1px solid rgba(15,23,42,0.6)`;
+        const labelCell = document.createElement('div');
+        labelCell.style.cssText = `width:${labelW}px;flex-shrink:0;font-size:10px;font-weight:700;text-transform:uppercase;color:#6b7280;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em`;
+        labelCell.innerHTML = `Asset Strands <span style="color:#374151;cursor:help" title="Each row tracks one of the 11 infrastructure categories across all 24 months of the audit.">ⓘ</span>`;
+        headerRow.appendChild(labelCell);
+        months.forEach(m => {
+            const mDiv = document.createElement('div');
+            mDiv.style.cssText = `width:${cellW}px;flex-shrink:0;text-align:center;font-size:9px;font-weight:700;text-transform:uppercase;color:#6b7280;font-family:'JetBrains Mono',monospace;line-height:1.2`;
+            const parts = m.split("'");
+            mDiv.innerHTML = `${parts[0]}<br><span style="font-size:7px;opacity:0.5">'${parts[1]}</span>`;
+            headerRow.appendChild(mDiv);
+        });
+        grid.appendChild(headerRow);
+
+        // Data rows
+        strands.forEach(strand => {
+            const row = document.createElement('div');
+            row.style.cssText = `display:flex;gap:${gap}px;align-items:center`;
+
+            const lbl = document.createElement('div');
+            lbl.style.cssText = `width:${labelW}px;flex-shrink:0;font-size:11px;font-weight:600;color:#cbd5e1;font-family:'Inter',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:8px`;
+            lbl.textContent = strand.label;
+            row.appendChild(lbl);
+
+            strand.cells.forEach((c, i) => {
+                const cell = document.createElement('div');
+                cell.className = `mc ${c}`;
+                cell.style.cssText = `width:${cellW}px;flex-shrink:0`;
+                const tip = strand.tips[i] || '';
+                if (tip) {
+                    cell.addEventListener('mouseenter', () => {
+                        reader.textContent = tip;
+                        reader.classList.add('text-amber-400','border-amber-900/60','bg-amber-950/20');
+                    });
+                    cell.addEventListener('mouseleave', () => {
+                        reader.textContent = 'Hover over a matrix cell to decode the data record';
+                        reader.classList.remove('text-amber-400','border-amber-900/60','bg-amber-950/20');
+                    });
+                }
+                row.appendChild(cell);
+            });
+            grid.appendChild(row);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', buildMatrix);
+</script>
+</body>
+</html>

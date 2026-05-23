@@ -1,0 +1,5 @@
+# No external packages needed — uses Python standard library only.
+# Requires Python 3.6+
+#
+# To verify your Python version:
+#   python --version

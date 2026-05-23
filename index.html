@@ -3,768 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tudor Transparency Ledger | Data-Driven Infrastructure Audit</title>
-
+    <title>Tudor Transparency Ledger | Overview</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    gridTemplateColumns: {
-                        '13': 'repeat(13, minmax(0, 1fr))',
-                        '14': 'repeat(14, minmax(0, 1fr))'
-                    },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Cabinet Grotesk', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace']
+                        sans: ['Inter','sans-serif'],
+                        display: ['Cabinet Grotesk','sans-serif'],
+                        mono: ['JetBrains Mono','monospace']
                     },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    }
+                    animation: { 'pulse-slow': 'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite' }
                 }
             }
         }
     </script>
-
     <style>
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #030712; }
-        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #374151; }
-
-        .matrix-cell { transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
-        .matrix-cell:hover { transform: scale(1.15) translateY(-3px); z-index: 30; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.7); }
-
-        .glass-panel { background: rgba(10, 15, 30, 0.6); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .animate-modal { animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        ::-webkit-scrollbar{width:6px;height:6px}
+        ::-webkit-scrollbar-track{background:#030712}
+        ::-webkit-scrollbar-thumb{background:#1f2937;border-radius:9999px}
+        ::-webkit-scrollbar-thumb:hover{background:#374151}
+        .glass-panel{background:rgba(10,15,30,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+        @keyframes modalFadeIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+        .animate-modal{animation:modalFadeIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards}
+        .bar-item:hover .bar-fill{opacity:0.75}
+        .bar-item:hover .bar-tip{display:block}
+        .bar-tip{display:none}
     </style>
 </head>
 <body class="min-h-screen pb-40 selection:bg-red-500/30 selection:text-red-300">
+<div class="w-full h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-red-600"></div>
 
-    <div class="w-full h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-red-600"></div>
-
-    <!-- Disclaimer Modal -->
-    <div id="disclaimerModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#030712]/95 backdrop-blur-md transition-opacity duration-300">
-        <div class="glass-panel border border-slate-800 max-w-2xl w-full rounded-3xl p-6 sm:p-8 space-y-6 animate-modal shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-red-600"></div>
-            <div class="space-y-2">
-                <span class="text-[10px] font-mono uppercase tracking-widest text-amber-500 font-bold bg-amber-500/10 px-2.5 py-1 rounded">Gateway Compliance Protocol</span>
-                <h2 class="text-2xl sm:text-3xl font-display font-black text-white tracking-tight mt-2">Portal Purpose & Data Disclaimer</h2>
-            </div>
-            <div class="text-sm text-slate-400 space-y-4 leading-relaxed font-normal">
-                <p>Welcome to the <span class="text-white font-semibold">Tudor Transparency Ledger</span>. This interface operates as an empirical, data-driven archive tracking communication trails, systemic administrative blockages, and outstanding civil requirements within the Casagrand Tudor ecosystem.</p>
-                <p>
-                    <strong class="text-amber-400 font-semibold uppercase font-mono text-xs block mb-1">⚠️ Verification Framework:</strong>
-                    The analytics, latency trackers, and state vectors presented inside are derived exclusively from a meticulous compliance audit mapping over 312 formal community email correspondences spanning from May 2024 through May 2026.
-                </p>
-                <p>This dashboard is structured entirely for objective transparency, informational accuracy, and resident civic awareness. Users are encouraged to cross-verify specific log indices against their own historical documentation.</p>
-            </div>
-            <div class="pt-4 border-t border-slate-900 flex justify-end">
-                <button onclick="acceptDisclaimer()" class="bg-slate-700 hover:bg-slate-600 text-white font-mono text-xs uppercase font-bold tracking-wider px-6 py-3 rounded-xl transition-all duration-200 hover:shadow-lg active:scale-95">
-                    Acknowledge & Access Ledger
-                </button>
-            </div>
+<!-- Disclaimer Modal -->
+<div id="disclaimerModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#030712]/95 backdrop-blur-md">
+    <div class="glass-panel border border-slate-800 max-w-2xl w-full rounded-3xl p-6 sm:p-8 space-y-6 animate-modal shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-red-600"></div>
+        <div class="space-y-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-amber-500 font-bold bg-amber-500/10 px-2.5 py-1 rounded">Gateway Compliance Protocol</span>
+            <h2 class="text-2xl sm:text-3xl font-display font-black text-white tracking-tight mt-2">Portal Purpose & Data Disclaimer</h2>
+        </div>
+        <div class="text-sm text-slate-400 space-y-4 leading-relaxed">
+            <p>Welcome to the <span class="text-white font-semibold">Tudor Transparency Ledger</span>. This interface operates as an empirical, data-driven archive tracking communication trails, systemic administrative blockages, and outstanding civil requirements within the Casagrand Tudor ecosystem.</p>
+            <p><strong class="text-amber-400 font-semibold uppercase font-mono text-xs block mb-1">⚠ Verification Framework:</strong>
+            All analytics are derived exclusively from a formal audit of <span class="text-white font-semibold">500 owner-initiated emails</span> across <span class="text-white font-semibold">174 documented conversation threads</span> spanning May 2024 – May 2026. Individual Casagrand staff identities are aliased (staff1, staff2…) to protect privacy.</p>
+            <p>This dashboard is structured entirely for objective transparency, informational accuracy, and resident civic awareness. Users are encouraged to cross-verify specific entries against their own documentation.</p>
+        </div>
+        <div class="pt-4 border-t border-slate-900 flex justify-end">
+            <button onclick="acceptDisclaimer()" class="bg-slate-700 hover:bg-slate-600 text-white font-mono text-xs uppercase font-bold tracking-wider px-6 py-3 rounded-xl transition-all duration-200 active:scale-95">
+                Acknowledge & Access Ledger
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-[#030712]/80 backdrop-blur-md border-b border-gray-900/60 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse-slow"></span>
-                <span class="text-xs font-mono tracking-widest uppercase text-slate-400">Status: Empirical Archive Live</span>
-            </div>
-            <div class="flex items-center gap-6 text-xs font-mono">
-                <a href="#about-section" class="text-slate-400 hover:text-white transition duration-200">About & Purpose</a>
-                <a href="#matrix-deck" class="text-slate-400 hover:text-white transition duration-200">Delay Matrix</a>
-                <a href="#escalation-deck" class="text-slate-400 hover:text-white transition duration-200">Failed Escalations</a>
-                <a href="#pills-deck" class="text-slate-400 hover:text-white transition duration-200">8 Structural Pillars</a>
+<!-- Nav -->
+<nav class="sticky top-0 z-50 bg-[#030712]/80 backdrop-blur-md border-b border-gray-900/60 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse-slow"></span>
+            <span class="text-xs font-mono tracking-widest uppercase text-slate-400">Tudor Transparency Ledger</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs font-mono">
+            <a href="index.html" class="text-white font-bold border-b border-red-500 pb-0.5">Overview</a>
+            <a href="matrix.html" class="text-slate-400 hover:text-white transition">Delay Matrix</a>
+            <a href="escalations.html" class="text-slate-400 hover:text-white transition">Escalations</a>
+            <a href="pillars.html" class="text-slate-400 hover:text-white transition">Infrastructure Pillars</a>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-6 mt-12 sm:mt-16 space-y-16">
+
+    <!-- Hero -->
+    <header class="space-y-4 max-w-4xl">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-red-500/10 text-red-400 border border-red-500/20 rounded-md font-mono">Verified Communication Mapping Engine</span>
+        <h1 class="text-4xl sm:text-6xl font-black font-display tracking-tight text-white leading-none">
+            The Tudor Transparency <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-amber-400">Communication Ledger</span>
+        </h1>
+        <p class="text-base text-slate-400 leading-relaxed max-w-2xl">A formal audit of 500 owner-initiated emails across 174 threads spanning May 2024 – May 2026, documenting infrastructure failures, unanswered escalations, and pending builder commitments at Casagrand Tudor, Chennai.</p>
+    </header>
+
+    <!-- About -->
+    <section class="glass-panel border border-slate-900/80 rounded-3xl p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-4">
+            <h3 class="text-xl font-bold font-display text-white tracking-tight">System Objective & Core Purpose</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">This system transforms decentralised resident documentation into an organised, objective, empirical data structure. By tracking explicit timelines, correspondence records, and response patterns, this portal maps 24 months of formal owner communication regarding infrastructure deficiencies across 11 categories.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs font-mono">
+                <div class="flex items-start gap-2.5"><span class="text-emerald-500">✔</span><span class="text-slate-300"><strong class="text-white">Data-Driven:</strong> 500 owner emails, 174 threads. No inferred or estimated data.</span></div>
+                <div class="flex items-start gap-2.5"><span class="text-emerald-500">✔</span><span class="text-slate-300"><strong class="text-white">11 Categories:</strong> Water, Electrical, Elevators, Solar, Parking, Amenities, Civil, Compliance, Fire Safety, Security, Governance.</span></div>
+                <div class="flex items-start gap-2.5"><span class="text-emerald-500">✔</span><span class="text-slate-300"><strong class="text-white">Thread-Level Audit:</strong> Every email linked to its originating conversation thread.</span></div>
+                <div class="flex items-start gap-2.5"><span class="text-emerald-500">✔</span><span class="text-slate-300"><strong class="text-white">Staff Privacy:</strong> Individual Casagrand staff aliased as staff1–staff64.</span></div>
             </div>
         </div>
-    </nav>
+        <div class="bg-slate-950/60 rounded-2xl p-5 border border-slate-900 flex flex-col justify-center space-y-2">
+            <div class="text-[10px] font-mono uppercase tracking-wider font-bold text-amber-500">Legal Anchor Notice</div>
+            <p class="text-[11px] text-slate-500 leading-normal">All metrics are derived exclusively from formal email correspondence records (May 2024 – May 2026). All data points are verifiable against the source audit. Cross-verify against your own documentation.</p>
+        </div>
+    </section>
 
-    <main class="max-w-7xl mx-auto px-6 mt-12 sm:mt-16 space-y-16">
+    <!-- KPI Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="glass-panel border border-slate-900 rounded-2xl p-6 space-y-2">
+            <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Owner Emails Filed</div>
+            <div class="text-4xl font-bold tracking-tight text-amber-400 font-mono">500</div>
+            <p class="text-xs text-slate-400">Formal emails sent by owners across 174 conversation threads, May 2024 – May 2026.</p>
+        </div>
+        <div class="glass-panel border border-red-900/30 rounded-2xl p-6 space-y-2">
+            <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Casagrand Formal Replies</div>
+            <div class="text-4xl font-bold tracking-tight text-red-500 font-mono">3</div>
+            <p class="text-xs text-slate-400">Total emails from @casagrand.co.in across 24 months — all 3 in a single 3-day window in June 2024. Zero since.</p>
+        </div>
+        <div class="glass-panel border border-red-900/30 rounded-2xl p-6 space-y-2">
+            <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Threads Without CG Response</div>
+            <div class="text-4xl font-bold tracking-tight text-red-600 font-mono">144/145</div>
+            <p class="text-xs text-slate-400">99.3% of owner-initiated threads received zero reply from any @casagrand.co.in address.</p>
+        </div>
+        <div class="glass-panel border border-slate-900 rounded-2xl p-6 space-y-2">
+            <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">CG Staff Emailed</div>
+            <div class="text-4xl font-bold tracking-tight text-purple-400 font-mono">64</div>
+            <p class="text-xs text-slate-400">Unique Casagrand staff members who received owner emails — 3,644 total individual email instances.</p>
+        </div>
+    </section>
 
-        <!-- Hero -->
-        <header class="space-y-4 max-w-4xl">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-red-500/10 text-red-400 border border-red-500/20 rounded-md font-mono">
-                Verified Communication Mapping Engine
-            </span>
-            <h1 class="text-4xl sm:text-6xl font-black font-display tracking-tight text-white leading-none">
-                The Tudor Transparency <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-amber-400">Communication Ledger</span>
-            </h1>
-        </header>
-
-        <!-- About -->
-        <section id="about-section" class="glass-panel border border-slate-900/80 rounded-3xl p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-4">
-                <h3 class="text-xl font-bold font-display text-white tracking-tight">System Objective & Core Purpose</h3>
-                <p class="text-sm text-slate-400 leading-relaxed">
-                    This system was engineered to transform decentralized resident struggles into an organized, objective, and empirical data structure. By tracking explicit timelines, ticket closures, and responses, this portal prevents critical infrastructure promises from being lost in administrative delay loops.
-                </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs font-mono">
-                    <div class="flex items-start gap-2.5">
-                        <span class="text-emerald-500">✔</span>
-                        <span class="text-slate-300"><strong class="text-white">Data-Driven:</strong> Anchored entirely by 312 audited outbound and inbound email fields.</span>
+    <!-- Response Accountability -->
+    <section class="glass-panel border border-red-900/30 rounded-3xl p-6 sm:p-8 space-y-8">
+        <div class="space-y-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-red-400 font-bold bg-red-500/10 px-2.5 py-1 rounded">Derived From @casagrand.co.in Domain Records Only</span>
+            <h3 class="text-2xl font-bold tracking-tight text-white font-display">Response Accountability Record</h3>
+            <p class="text-xs text-slate-400">The following figures are derived exclusively from the formal email audit. Comparisons reference @casagrand.co.in senders only.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left: visual ratio + key facts -->
+            <div class="space-y-6">
+                <div class="space-y-3">
+                    <div class="text-xs font-mono uppercase text-slate-500 tracking-wider">Thread Response Ratio — Owner-Initiated Threads (145 Total)</div>
+                    <div class="flex rounded-lg overflow-hidden h-10 text-[10px] font-mono font-bold">
+                        <div class="bg-emerald-800 flex items-center justify-center px-2 text-emerald-300 flex-shrink-0" style="width:0.7%"></div>
+                        <div class="flex-1 bg-red-950/70 border border-red-900/30 flex items-center px-4 text-red-300">144 threads — zero @casagrand.co.in reply (99.3%)</div>
                     </div>
-                    <div class="flex items-start gap-2.5">
-                        <span class="text-emerald-500">✔</span>
-                        <span class="text-slate-300"><strong class="text-white">Complete Accountability:</strong> Spans all 8 core asset handover categories structurally.</span>
+                    <div class="flex gap-5 text-[10px] font-mono text-slate-500">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-emerald-800"></span>1 thread replied (0.7%)</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-red-950/70 border border-red-900/30"></span>144 unanswered (99.3%)</span>
                     </div>
                 </div>
-            </div>
-            <div class="bg-slate-950/60 rounded-2xl p-5 border border-slate-900 flex flex-col justify-center space-y-2">
-                <div class="text-[10px] font-mono uppercase tracking-wider font-bold text-amber-500">Legal Anchor Notice</div>
-                <p class="text-[11px] text-slate-500 leading-normal">
-                    The facts mapped across this timeline represent recorded correspondence indices. All metrics and response delay logs are provided for transparency and resident civic awareness. Cross-verify against your own documentation.
-                </p>
-            </div>
-        </section>
-
-        <!-- KPI Cards -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="glass-panel border border-slate-900 rounded-2xl p-6 space-y-2">
-                <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Mean Latency to Human Reply</div>
-                <div class="text-3xl font-bold tracking-tight text-amber-500 font-mono">14.2 Days</div>
-                <p class="text-xs text-slate-400">Average duration before an explicit engineering parameters analysis was issued instead of templates.</p>
-            </div>
-            <div class="glass-panel border border-slate-900 rounded-2xl p-6 space-y-2">
-                <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Defect Acceleration Window</div>
-                <div class="text-3xl font-bold tracking-tight text-red-500 font-mono">360+ Days</div>
-                <p class="text-xs text-slate-400">Unresolved active tracking timeline for deep foundational risks left unmitigated on the building site floor.</p>
-            </div>
-            <div class="glass-panel border border-slate-900 rounded-2xl p-6 space-y-2">
-                <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Substantive Resolution Rate</div>
-                <div class="text-3xl font-bold tracking-tight text-emerald-500 font-mono">1.6%</div>
-                <p class="text-xs text-slate-400">Empirical ratio of verified on-ground fixes relative to total recorded structural issue logs.</p>
-                <p class="text-[10px] text-amber-400/80 font-mono border-t border-slate-900 pt-2 mt-1">⚠ Subjective — derived exclusively from formal email correspondence records. On-ground verification conducted by residents, not an independent third party.</p>
-            </div>
-            <div class="glass-panel border border-slate-900 rounded-2xl p-6 space-y-2">
-                <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Dashboard Cleansing Rate</div>
-                <div class="text-3xl font-bold tracking-tight text-purple-400 font-mono">73.7%</div>
-                <p class="text-xs text-slate-400">Automated helpdesk tickets marked closed without verified physical engineering dispatch.</p>
-            </div>
-        </section>
-
-        <!-- Heatmap Matrix -->
-        <section id="matrix-deck" class="glass-panel border border-slate-900/60 rounded-3xl p-6 sm:p-8 space-y-6">
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-                <div class="space-y-1">
-                    <h3 class="text-2xl font-bold tracking-tight text-white font-display">Systemic Delay & Horizon Matrix</h3>
-                    <p class="text-xs text-slate-400">Coverage: May 2024 – Feb 2025 and Apr 2026 – May 2026. Months between Mar 2025 and Mar 2026 are not represented in this matrix view. Hover nodes to parse ledger details.</p>
-                </div>
-                <div id="heatmap-reader" class="bg-slate-950/80 px-4 py-2.5 rounded-xl border border-slate-800 text-xs text-slate-400 font-medium font-mono min-w-[360px] text-center lg:text-right shadow-inner transition-all duration-200">
-                    Hover over a matrix block to decode data files
+                <div class="bg-slate-950/60 border border-slate-900 rounded-2xl p-5 space-y-3">
+                    <p class="text-[10px] font-mono uppercase text-slate-500 tracking-wider">Key Facts From The Audit Record</p>
+                    <ul class="space-y-2.5 text-xs text-slate-400 leading-relaxed">
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span>All 3 Casagrand replies were in a single thread in June 2024 (June 5–7). Zero @casagrand.co.in emails recorded after June 7, 2024.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">md@casagrand.co.in</span> received 305 owner emails across the audit period. Zero replies on record.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">escalationdesk@casagrand.co.in</span> received 148 escalation emails. Zero replies on record.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span><span class="font-mono text-slate-300">icare@casagrand.co.in</span> received 142 emails. Zero replies from this address on record.</li>
+                        <li class="flex gap-2.5"><span class="text-red-400 flex-shrink-0 font-mono">→</span>64 unique Casagrand staff received owner emails (3,644 instances total). Only 2 staff members responded — once each — in June 2024.</li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="overflow-x-auto pt-2">
-                <div class="min-w-[1100px] space-y-3 pb-2">
-
-                    <!-- Header Row — grid-cols-14: col-span-2 label + 12 month columns -->
-                    <div class="grid grid-cols-14 gap-2 text-center text-[10px] uppercase font-bold text-slate-500 font-mono border-b border-slate-900/60 pb-3">
-                        <div class="col-span-2 text-left flex items-center gap-1.5">
-                            <span>Asset Strands</span>
-                            <span class="text-slate-600 cursor-help" title="Each row is one of the 8 infrastructure categories (Water, Power, Elevators, etc.) tracked across the audit timeline. 'Asset Strands' means each distinct thread of builder delivery obligations — one strand per category of promised infrastructure.">ⓘ</span>
-                        </div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>MAY</span><span class="text-[7px] opacity-50">'24</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>JUN</span><span class="text-[7px] opacity-50">'24</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>JUL</span><span class="text-[7px] opacity-50">'24</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>AUG</span><span class="text-[7px] opacity-50">'24</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>SEP</span><span class="text-[7px] opacity-50">'24</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>OCT</span><span class="text-[7px] opacity-50">'24</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>NOV</span><span class="text-[7px] opacity-50">'24</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>DEC</span><span class="text-[7px] opacity-50">'24</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>JAN</span><span class="text-[7px] opacity-50">'25</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>FEB</span><span class="text-[7px] opacity-50">'25</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>APR</span><span class="text-[7px] opacity-50">'26</span></div>
-                        <div class="flex flex-col items-center leading-none gap-0.5"><span>MAY</span><span class="text-[7px] opacity-50">'26</span></div>
+            <!-- Right: top recipients table -->
+            <div class="space-y-3">
+                <div class="text-xs font-mono uppercase text-slate-500 tracking-wider">Top 10 Casagrand Recipients — Emails Received</div>
+                <div class="space-y-1.5 text-xs font-mono">
+                    <!-- header -->
+                    <div class="grid grid-cols-12 gap-2 text-[9px] uppercase text-slate-600 font-bold px-3 pb-1 border-b border-slate-900">
+                        <div class="col-span-7">Recipient</div>
+                        <div class="col-span-3 text-right">Emails Received</div>
+                        <div class="col-span-2 text-center">Reply</div>
                     </div>
-
-                    <!-- Strand 1: Water Infrastructure -->
-                    <div class="grid grid-cols-14 gap-2 items-center">
-                        <div class="col-span-2 text-xs font-semibold text-slate-300 truncate pr-2">1. Water Infrastructure</div>
-                        <div class="h-9 rounded bg-red-950/30 border border-red-900/20 matrix-cell cursor-pointer" onmouseenter="readCell('May 2024: 12 Outreach Emails Sent Regarding WTP Blueprint | 0 Responses')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-amber-600 matrix-cell cursor-pointer" onmouseenter="readCell('July 2024: WTP Carbon Media Filtration Omissions Caught & Traced')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-emerald-600 matrix-cell cursor-pointer" onmouseenter="readCell('August 2024: Written Admission of 4/7 Defective Borewells & High 1250 TDS')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-600 matrix-cell cursor-pointer" onmouseenter="readCell('Jan 2025: Water Line Cross-Contamination Warning Escalated')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-700 matrix-cell cursor-pointer" onmouseenter="readCell('May 2026: Contamination Notice Forwarded Directly to Executive Desk')" onmouseleave="clearCell()"></div>
+                    <!-- rows -->
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff1@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">417</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
-
-                    <!-- Strand 2: Power Grid & DG -->
-                    <div class="grid grid-cols-14 gap-2 items-center">
-                        <div class="col-span-2 text-xs font-semibold text-slate-300 truncate pr-2">2. Power Grid & DG</div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-amber-700 matrix-cell cursor-pointer" onmouseenter="readCell('October 2024: Builder Notification of TNEB Substation Transformer Deferral')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-amber-700 matrix-cell cursor-pointer" onmouseenter="readCell('November 2024: Secondary Fuel Cost Shift Applied to Resident Logs')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-amber-600 matrix-cell cursor-pointer" onmouseenter="readCell('Feb 2025: 42 Direct Logs Sent Regarding Grid Voltage Spikes')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">md@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">305</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
-
-                    <!-- Strand 3: Elevator Safety -->
-                    <div class="grid grid-cols-14 gap-2 items-center">
-                        <div class="col-span-2 text-xs font-semibold text-slate-300 truncate pr-2">3. Elevator Safety</div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-700 matrix-cell cursor-pointer" onmouseenter="readCell('July 2024: Block C ARD Failure Emergency Outage & Trap Event')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-amber-700 matrix-cell cursor-pointer" onmouseenter="readCell('August 2024: Holding Text Issued by Helpdesk for Lift Load Calibration')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-600 matrix-cell cursor-pointer" onmouseenter="readCell('Jan 2025: Sudden Shaft Drops in Block F; Missing Certificates Listed')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff2@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">274</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
-
-                    <!-- Strand 4: Solar Arrays -->
-                    <div class="grid grid-cols-14 gap-2 items-center">
-                        <div class="col-span-2 text-xs font-semibold text-slate-300 truncate pr-2">4. Solar Arrays</div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-950/40 border border-red-900/30 matrix-cell cursor-pointer" onmouseenter="readCell('September 2024: kW Deficit Assessment Request Filed for Net Metering')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-amber-600 matrix-cell cursor-pointer" onmouseenter="readCell('October 2024: Common Area Generation Shortfall Deflections')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-600 matrix-cell cursor-pointer" onmouseenter="readCell('April 2026: Photovoltaic Procurement Shortfall Copied to Legal Notice')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff3@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">241</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
-
-                    <!-- Strand 5: Parking Deliverables -->
-                    <div class="grid grid-cols-14 gap-2 items-center">
-                        <div class="col-span-2 text-xs font-semibold text-slate-300 truncate pr-2">5. Parking Deliverables</div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-600 matrix-cell cursor-pointer" onmouseenter="readCell('June 2024: Allocation Boundaries Violation & Width Deficiencies Discovered')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-amber-700 matrix-cell cursor-pointer" onmouseenter="readCell('September 2024: Low Ceiling Clearance & Basement Water Pooling Logged')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-700 matrix-cell cursor-pointer" onmouseenter="readCell('Jan 2025: Driveway Crack Vectors & Pillar Obstruction Claims')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff4@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">238</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
-
-                    <!-- Strand 6: Common Amenities -->
-                    <div class="grid grid-cols-14 gap-2 items-center">
-                        <div class="col-span-2 text-xs font-semibold text-slate-300 truncate pr-2">6. Common Amenities</div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-600 matrix-cell cursor-pointer" onmouseenter="readCell('September 2024: Unfinished Clubhouse Interiors & Uncertified Play Equipment')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-amber-600 matrix-cell cursor-pointer" onmouseenter="readCell('November 2024: Pool Filtration Failures & CCTV Security Omissions Logged')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff5@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">184</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
-
-                    <!-- Strand 7: Civil Defects -->
-                    <div class="grid grid-cols-14 gap-2 items-center">
-                        <div class="col-span-2 text-xs font-semibold text-slate-300 truncate pr-2">7. Civil Defects</div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-950/40 border border-red-900/30 matrix-cell cursor-pointer" onmouseenter="readCell('June 2024: Core Wall Fractures and Walkway Masonry Faults Lodged')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-amber-600 matrix-cell cursor-pointer" onmouseenter="readCell('Jan 2025: Concrete Structural Seepage Passes 360-Day Latency Line')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-amber-600 matrix-cell cursor-pointer" onmouseenter="readCell('Feb 2025: 142 System Dashboard Tickets Cleansed Without Field Fixes')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff6@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">173</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
-
-                    <!-- Strand 8: Statutory Compliance -->
-                    <div class="grid grid-cols-14 gap-2 items-center">
-                        <div class="col-span-2 text-xs font-semibold text-slate-300 truncate pr-2">8. Statutory Compliance</div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-slate-900/40 border border-slate-950 matrix-cell cursor-pointer"></div>
-                        <div class="h-9 rounded bg-red-600 matrix-cell cursor-pointer" onmouseenter="readCell('April 2026: 200+ Handover Maintenance Funding Freeze Notice Dispatched')" onmouseleave="clearCell()"></div>
-                        <div class="h-9 rounded bg-red-700 matrix-cell cursor-pointer" onmouseenter="readCell('May 2026: SRO Villivakkam Registration Misdirection Discovered & Challenged')" onmouseleave="clearCell()"></div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff7@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">168</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
                     </div>
-
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">staff8@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">165</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 rounded-lg px-3 py-2 border border-slate-900/60">
+                        <div class="col-span-7 text-slate-300">escalationdesk@casagrand.co.in</div>
+                        <div class="col-span-3 text-right text-amber-400">148</div>
+                        <div class="col-span-2 text-center text-red-500">0</div>
+                    </div>
                 </div>
+                <p class="text-[10px] text-slate-600 font-mono pt-1">Full 64-recipient breakdown available in <a href="escalations.html" class="text-slate-400 hover:text-white underline">Escalations →</a></p>
             </div>
+        </div>
+    </section>
 
-            <!-- Color Legend -->
-            <div class="flex flex-wrap items-center justify-end gap-5 text-[10px] uppercase font-bold font-mono pt-3 border-t border-slate-900/50 text-slate-500">
-                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-slate-900 border border-slate-800"></span> Zero Activity</div>
-                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-red-950/40 border border-red-900/40"></span> Unanswered Logs</div>
-                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-red-600"></span> Active Neglect</div>
-                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-amber-600"></span> Helpdesk Stalling</div>
-                <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-emerald-600"></span> Written Admission</div>
+    <!-- Monthly Volume Chart -->
+    <section class="glass-panel border border-slate-900/60 rounded-3xl p-6 sm:p-8 space-y-6">
+        <div class="space-y-1">
+            <h3 class="text-2xl font-bold tracking-tight text-white font-display">Monthly Owner Email Volume</h3>
+            <p class="text-xs text-slate-400">Owner-initiated emails per month, June 2024 – May 2026. Hover bars for detail. Peak: June 2025 (56 emails).</p>
+        </div>
+        <div class="overflow-x-auto">
+            <div id="monthlyChart" class="flex items-end gap-1.5 min-w-[700px]" style="height:200px;padding-bottom:28px"></div>
+        </div>
+        <div class="flex flex-wrap gap-5 text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-900/50">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded" style="background:#475569"></span>1–5 emails</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded" style="background:#d97706"></span>6–15 emails</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded" style="background:#f97316"></span>16–30 emails</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded" style="background:#ef4444"></span>31–49 emails</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded" style="background:#dc2626"></span>50+ emails</span>
+        </div>
+    </section>
+
+    <!-- What We Are Asking For -->
+    <section class="glass-panel border border-amber-900/30 rounded-3xl p-6 sm:p-8 space-y-6">
+        <div class="space-y-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-2.5 py-1 rounded">Formal Documented Requests</span>
+            <h3 class="text-2xl font-bold tracking-tight text-white font-display">What We Are Asking For</h3>
+            <p class="text-xs text-slate-400">The following are documented requests derived from owner email records. These requests have been raised formally across multiple correspondences and remain outstanding.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">01 — Response</div>
+                <p class="text-sm font-semibold text-white">Formal written responses to all 144 unanswered email threads</p>
+                <p class="text-xs text-slate-400">Owners have sent 500 formal emails. 99.3% of threads received zero reply from any @casagrand.co.in address.</p>
             </div>
-        </section>
-
-        <!-- Failed Escalations -->
-        <section id="escalation-deck" class="glass-panel border border-red-900/30 rounded-3xl p-6 sm:p-8 space-y-6">
-            <div class="space-y-2">
-                <span class="text-[10px] font-mono uppercase tracking-widest text-red-400 font-bold bg-red-500/10 px-2.5 py-1 rounded">Documented From Email Records Only</span>
-                <h3 class="text-2xl font-bold tracking-tight text-white font-display mt-2">Failed Escalations & Non-Responses</h3>
-                <p class="text-xs text-slate-400">The following instances are explicitly documented in the audit email records. Each entry reflects a formal escalation that received no substantive response, or a systemic administrative action used in place of genuine resolution.</p>
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">02 — Water & STP</div>
+                <p class="text-sm font-semibold text-white">WTP and STP compliance certification with independent verification</p>
+                <p class="text-xs text-slate-400">83 water-related owner emails filed. Borewell TDS, filtration gaps, and STP noise formally documented.</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-                <div class="bg-red-950/20 border border-red-900/30 rounded-2xl p-5 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 animate-pulse-slow"></span>
-                        <span class="text-[10px] font-mono uppercase tracking-wider text-red-400 font-bold">Zero Response — May 2024</span>
-                    </div>
-                    <h4 class="text-sm font-bold text-white">12 Formal WTP Blueprint Emails | 0 Responses Received</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">12 outreach emails were formally sent to <span class="font-mono text-slate-300">icare@casagrand.co.in</span> regarding Water Treatment Plant blueprint discrepancies. Per the audit record, zero responses were received to any of these 12 emails.</p>
-                </div>
-
-                <div class="bg-amber-950/20 border border-amber-900/30 rounded-2xl p-5 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0"></span>
-                        <span class="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">Template Stall — July 17, 2024</span>
-                    </div>
-                    <h4 class="text-sm font-bold text-white">WTP Audit Request Met With Layer B Holding Template</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">The formal WTP specification discrepancy filed July 11, 2024 received a holding template six days later: <span class="italic text-slate-300">"Kindly give us some time for our internal discussion based on the site audit report... will revert shortly."</span> No substantive revert is documented in the audit record.</p>
-                </div>
-
-                <div class="bg-amber-950/20 border border-amber-900/30 rounded-2xl p-5 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0"></span>
-                        <span class="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">No Response on Record — Jan 19, 2025</span>
-                    </div>
-                    <h4 class="text-sm font-bold text-white">Elevator Safety Certification Escalation — Escalation Desk, No Reply</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">A formal compliance escalation regarding missing elevator safety certificates and Block F shaft drops was directed to <span class="font-mono text-slate-300">escalationdesk@casagrand.co.in</span>. No response to this escalation is present in the audit record.</p>
-                </div>
-
-                <div class="bg-red-950/20 border border-red-900/30 rounded-2xl p-5 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></span>
-                        <span class="text-[10px] font-mono uppercase tracking-wider text-red-400 font-bold">Systemic Non-Resolution — Continuous 2025</span>
-                    </div>
-                    <h4 class="text-sm font-bold text-white">142 Civil Defect Tickets Closed Without Physical Verification</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">Audit data documents 142 distinct civil defects — including unit seepage and structural fractures — marked 'Resolved' on the internal helpdesk platform without any documented physical site repair or field dispatch.</p>
-                </div>
-
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">03 — Elevators</div>
+                <p class="text-sm font-semibold text-white">Valid elevator safety certificates displayed in all lift cars</p>
+                <p class="text-xs text-slate-400">27 elevator-related emails filed. Life-threatening incidents in B and C Blocks formally escalated.</p>
             </div>
-        </section>
-
-        <!-- 8 Structural Pillars -->
-        <section id="pills-deck" class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-
-            <div class="lg:col-span-1 space-y-4">
-                <p class="text-xs uppercase tracking-wider font-bold text-slate-500 font-mono px-2">Compliance Infrastructure Pillars</p>
-                <div class="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible gap-2 pb-2 lg:pb-0 font-medium text-xs" id="threadTabs">
-                    <button onclick="switchThread('water')" id="btn-water" class="w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-[#0a0f1e] text-white border-red-500/30 shadow-sm whitespace-nowrap">💧 1. Water Systems</button>
-                    <button onclick="switchThread('electrical')" id="btn-electrical" class="w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-transparent text-slate-400 border-slate-900 hover:border-slate-800 whitespace-nowrap">⚡ 2. Power & DG</button>
-                    <button onclick="switchThread('elevators')" id="btn-elevators" class="w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-transparent text-slate-400 border-slate-900 hover:border-slate-800 whitespace-nowrap">🛗 3. Elevator Safety</button>
-                    <button onclick="switchThread('solar')" id="btn-solar" class="w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-transparent text-slate-400 border-slate-900 hover:border-slate-800 whitespace-nowrap">☀️ 4. Solar Arrays</button>
-                    <button onclick="switchThread('parking')" id="btn-parking" class="w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-transparent text-slate-400 border-slate-900 hover:border-slate-800 whitespace-nowrap">🚗 5. Parking Spaces</button>
-                    <button onclick="switchThread('amenities')" id="btn-amenities" class="w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-transparent text-slate-400 border-slate-900 hover:border-slate-800 whitespace-nowrap">🏞️ 6. Amenities</button>
-                    <button onclick="switchThread('civil')" id="btn-civil" class="w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-transparent text-slate-400 border-slate-900 hover:border-slate-800 whitespace-nowrap">🏗️ 7. Civil Defects</button>
-                    <button onclick="switchThread('compliance')" id="btn-compliance" class="w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-transparent text-slate-400 border-slate-900 hover:border-slate-800 whitespace-nowrap">⚖️ 8. Handover Conflict</button>
-                </div>
-                <div class="glass-panel border border-slate-900 rounded-2xl p-4 space-y-2">
-                    <label class="text-[10px] font-bold uppercase text-slate-500 font-mono block">Real-time Data Filter</label>
-                    <input type="text" id="auditSearch" onkeyup="filterAuditLogs()" placeholder="Type to filter (e.g. TDS, Width, SRO)..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-red-500/50 transition font-mono shadow-inner">
-                </div>
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">04 — Electrical</div>
+                <p class="text-sm font-semibold text-white">Permanent TNEB grid connection without cost transfer to residents</p>
+                <p class="text-xs text-slate-400">Units handed over on temporary grid. DG fuel costs imposed on residents. 21 formal electrical emails filed.</p>
             </div>
-
-            <div class="lg:col-span-3 glass-panel border border-slate-900/60 rounded-3xl p-6 sm:p-8 space-y-8">
-                <div class="border-b border-slate-900 pb-5">
-                    <h3 id="threadTitle" class="text-2xl font-bold tracking-tight text-white font-display">Water Infrastructure & Core Utilities</h3>
-                    <p id="threadMeta" class="text-xs text-slate-400 mt-1 font-mono">Volume Target: 64 Enrolled Audit Trails</p>
-                </div>
-                <div id="timelineContainer" class="relative border-l border-slate-900 ml-4 pl-6 space-y-8"></div>
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">05 — Parking</div>
+                <p class="text-sm font-semibold text-white">Parking allotment letters issued to all residents</p>
+                <p class="text-xs text-slate-400">51 parking-related emails filed. Allotment letters, F-Block access, cycle racks and lobby spaces pending.</p>
             </div>
-        </section>
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">06 — Governance</div>
+                <p class="text-sm font-semibold text-white">AOA formation as mandated by RERA; IFM transition on agreed terms</p>
+                <p class="text-xs text-slate-400">52 governance-related emails filed covering AOA, IFM, RERA compliance and pending declarations.</p>
+            </div>
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">07 — Civil Defects</div>
+                <p class="text-sm font-semibold text-white">Physical site repair with documented verification — no dashboard closures</p>
+                <p class="text-xs text-slate-400">142 civil defect tickets were marked resolved on the helpdesk platform without documented on-site repair.</p>
+            </div>
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">08 — Fire Safety</div>
+                <p class="text-sm font-semibold text-white">DG exhaust health hazard resolution; fire incident disclosure</p>
+                <p class="text-xs text-slate-400">Fire incident in C Block and Millenia DG exhaust health hazard formally raised. No resolution on record.</p>
+            </div>
+            <div class="bg-slate-950/50 border border-slate-900 rounded-2xl p-4 space-y-2">
+                <div class="text-[10px] font-mono uppercase text-amber-500 font-bold">09 — Solar & PNG</div>
+                <p class="text-sm font-semibold text-white">Solar output verification; Piped Natural Gas connection delivered</p>
+                <p class="text-xs text-slate-400">Installed solar panels do not meet promised kW output. PNG connection formally requested multiple times.</p>
+            </div>
+        </div>
+    </section>
 
-    </main>
+</main>
 
-    <script>
-        const threadDatabase = {
-            water: {
-                title: "Water Infrastructure & Core Treatment Utility",
-                meta: "Volume Target: 64 Enrolled Audit Trails",
-                logs: [
-                    {
-                        type: "Owner Initiation",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "July 11, 2024",
-                        title: "WTP Specification Discrepancy Filed",
-                        summary: "Owner formally raised that the installed WTP lacks carbon media filtration assets specified in promotional blueprints. Per audit records, 12 outreach emails had already been sent in May 2024 with zero responses before this formal filing.",
-                        desc: "Formal baseline audit launched regarding missing carbon media filtration assets within the core Water Treatment Plant structure.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "icare@casagrand.co.in",
-                        searchTokens: "wtp water filter blueprint carbon treatment filtration",
-                        evidence: "Requesting immediate structural review to map systemic differences between promised promotional blueprints and actual site installations.",
-                        escalationFailed: true
-                    },
-                    {
-                        type: "Builder Stalling",
-                        badgeClass: "bg-amber-500/10 text-amber-400 border border-amber-500/20",
-                        time: "July 17, 2024",
-                        title: "Operational Delay Response [Layer B Template]",
-                        summary: "The formal WTP audit raised on July 11 received a holding template response six days later. No substantive technical engagement or follow-up revert is documented in the audit record.",
-                        desc: "Standard holding text issued by helpdesk layers to delay formal verification requests.",
-                        from: "icare@casagrand.co.in",
-                        to: "casagrandtudorowners@gmail.com",
-                        searchTokens: "stalling delay layer b template helpdesk text",
-                        evidence: "Kindly give us some time for our internal discussion based on the site audit report... will revert shortly.",
-                        escalationFailed: true
-                    },
-                    {
-                        type: "Substantive Admission",
-                        badgeClass: "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20",
-                        time: "August 14, 2024",
-                        title: "Borewell Deficiencies & 1250 TDS Confirmed",
-                        summary: "Builder's association confirmed in writing: only 3 of 7 drilled borewells are functional, and the newly erected borewell measures 1250 TDS — above acceptable drinking water levels.",
-                        desc: "Critical written response from association coordinators confirming systemic failure across drilled water supply assets.",
-                        from: "associationdesk@casagrand.co.in",
-                        to: "casagrandtudorowners@gmail.com",
-                        searchTokens: "borewell tds 1250 capacity admission contamination blocks d e",
-                        evidence: "Out of 7 drilled borewells, only 3 are functional... the newly erected borewell produces a high TDS of 1250.",
-                        escalationFailed: false
-                    }
-                ]
-            },
-            electrical: {
-                title: "Electrical Grid Integration & DG Overheads",
-                meta: "Volume Target: 42 Enrolled Audit Trails",
-                logs: [
-                    {
-                        type: "Builder Notification",
-                        badgeClass: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
-                        time: "October 12, 2024",
-                        title: "TNEB Substation Transformer Postponement",
-                        summary: "Builder notified residents that permanent substation layout clearances are pending. Units were declared 'ready' under temporary operational grid connections, meaning the permanent power supply infrastructure was incomplete at the point of handover.",
-                        desc: "The engineering layout team relays an indefinite delay in finalizing layout clearances for the permanent substation grid.",
-                        from: "associationdesk@casagrand.co.in",
-                        to: "casagrandtudorowners@gmail.com",
-                        searchTokens: "tneb station transformer grid delay commercial temporary lines",
-                        evidence: "The permanent transformer layout requires further clearances. Units are declared ready under temporary operational terms.",
-                        escalationFailed: false
-                    },
-                    {
-                        type: "Financial Shift",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "October 15, 2024",
-                        title: "Mandatory Generator Fuel Charging Imposed",
-                        summary: "Due to the deferred permanent grid connection, the builder imposed recurring monthly diesel generator fuel charges directly on residents, transferring the cost of an incomplete infrastructure commitment to the occupants.",
-                        desc: "The builder transfers recurring backup diesel fuel expenses directly to residents due to permanent grid layout deferrals.",
-                        from: "icare@casagrand.co.in",
-                        to: "casagrandtudorowners@gmail.com",
-                        searchTokens: "dg generator fuel charging cost shift billing surcharge",
-                        evidence: "Fixed monthly Diesel Generator fees applied (BHK configuration scale) to cross-subsidize backup overheads.",
-                        escalationFailed: false
-                    },
-                    {
-                        type: "Owner Filing",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "February 2025",
-                        title: "42 Direct Logs Filed — Grid Voltage Spikes",
-                        summary: "42 direct logs were submitted by residents regarding recurring grid voltage spike incidents. No substantive engineering response to these filings is documented in the audit record.",
-                        desc: "Residents submitted 42 formal logs documenting recurring voltage spike incidents attributed to the ongoing incomplete permanent grid infrastructure.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "icare@casagrand.co.in",
-                        searchTokens: "voltage spikes grid electrical power logs february 2025",
-                        evidence: "42 direct logs submitted regarding grid voltage spike incidents.",
-                        escalationFailed: true
-                    }
-                ]
-            },
-            elevators: {
-                title: "Vertical Transportation & Elevator Safety Logs",
-                meta: "Volume Target: 38 Enrolled Audit Trails",
-                logs: [
-                    {
-                        type: "Safety Incident",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "July 29, 2024",
-                        title: "Block C ARD Failure Emergency Outage",
-                        summary: "An Automatic Rescue Device failure in Block C trapped residents inside a stalled lift shaft. Emergency buttons failed to signal support teams. A helpdesk holding text was issued in August 2024 for lift load calibration — no substantive resolution is documented.",
-                        desc: "Critical trap ticket filed following an Automatic Rescue Device breakdown that marooned residents inside a stalled lift shaft.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "icare@casagrand.co.in",
-                        searchTokens: "elevator lift ard trapped block c safety outage emergency",
-                        evidence: "A dangerous ARD failing sequence trapped residents inside Block C shaft... Emergency buttons failed to signal support teams.",
-                        escalationFailed: false
-                    },
-                    {
-                        type: "Compliance Alert",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "January 19, 2025",
-                        title: "Missing Inspector Safety Certifications",
-                        summary: "Lifts in Block F were reported to have experienced sudden leveling drops and were operating without valid safety display certificates or load capacity clearance tags. This escalation was directed to the escalation desk — no response is documented in the audit record.",
-                        desc: "Audit warning issued to the developer regarding the total lack of visible state safety and weight capacity clearance tags within lift cars.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "escalationdesk@casagrand.co.in",
-                        searchTokens: "certificates safety load lift tags block f unleveling drops inspector",
-                        evidence: "Lifts are running without valid safety display logs. Block F has experienced sudden leveling drops between floor basements.",
-                        escalationFailed: true
-                    }
-                ]
-            },
-            solar: {
-                title: "Solar Grid Infrastructure & Capacity Deficits",
-                meta: "Volume Target: 22 Enrolled Audit Trails",
-                logs: [
-                    {
-                        type: "Owner Evaluation",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "September 04, 2024",
-                        title: "Common Area Renewable kW Output Deficit",
-                        summary: "Residents submitted engineering calculations showing installed rooftop solar panels do not meet the kW output promised in marketing materials for common area net metering. No substantive response to this filing is documented in the audit record.",
-                        desc: "Engineering calculation audit submitted tracing a major deficiency in rooftop photovoltaic panels relative to promised marketing layouts.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "icare@casagrand.co.in",
-                        searchTokens: "solar panels kw generation arrays brochure roof common net metering",
-                        evidence: "Installed panels do not meet the promised total kW output required to run common area net-metering loops.",
-                        escalationFailed: true
-                    }
-                ]
-            },
-            parking: {
-                title: "Parking Allotment, Encroachments & Driveway Slopes",
-                meta: "Volume Target: 48 Enrolled Audit Trails",
-                logs: [
-                    {
-                        type: "Allotment Error",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "June 22, 2024",
-                        title: "Dimensional Boundary Shrinkage & Structural Intrusion",
-                        summary: "Parking spaces were found below booking sheet specifications. Structural concrete pillars obstruct vehicle entry and door clearance. No documented resolution appears in the audit records.",
-                        desc: "Discrepancy notice filed regarding individual parking spaces shrinking below booking specifications, complicated by structural pillars.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "icare@casagrand.co.in",
-                        searchTokens: "parking space boundaries columns entry width allocation encroachment dimensions",
-                        evidence: "Allocated spaces do not match booking sheet square footage. Structural concrete columns obstruct vehicle entry and door clearance.",
-                        escalationFailed: false
-                    },
-                    {
-                        type: "Drainage Alert",
-                        badgeClass: "bg-amber-500/10 text-amber-400 border border-amber-500/20",
-                        time: "September 18, 2024",
-                        title: "Low Ceiling Clearance & Basement Water Pooling",
-                        summary: "Basement ceiling clearance was found below standard for mid-to-large SUVs. Driveway slope grading causes persistent stagnant water pooling near structural walls. No documented resolution appears in the audit records.",
-                        desc: "Formal ticket identifying low overhead ceiling pipes that block mid-to-large SUVs, alongside flat driveway sloping that creates stagnant pools.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "associationdesk@casagrand.co.in",
-                        searchTokens: "ceiling height drainage basement pool driveway slope cracks wall retaining",
-                        evidence: "Basement overhead clearance drops below standard specs. Driveway grading causes persistent stagnant water pooling near structural walls.",
-                        escalationFailed: false
-                    }
-                ]
-            },
-            amenities: {
-                title: "Common Amenities & Leisure Infrastructure Tracker",
-                meta: "Volume Target: 34 Enrolled Audit Trails",
-                logs: [
-                    {
-                        type: "Omission Filing",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "September 29, 2024",
-                        title: "Clubhouse Incompletion & Uncertified Play Equipment",
-                        summary: "At time of filing: clubhouse interiors were unfinished, children's play equipment lacked safety certificates, and pool filtration and CCTV security loops were not installed. No documented resolution appears in the audit records.",
-                        desc: "Detailed checklist filed itemizing unpainted clubhouse interiors, uncertified playground fixtures, and uninstalled security loops.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "icare@casagrand.co.in",
-                        searchTokens: "clubhouse play area amenities children pool filtration landscape cctv security access",
-                        evidence: "Common clubhouse fixtures remain unfinished. Children play area equipment lacks safety certificates, and pool filtration lacks loops.",
-                        escalationFailed: false
-                    }
-                ]
-            },
-            civil: {
-                title: "Common Area Structural Deficiencies & Seepage Logs",
-                meta: "Volume Target: 44 Enrolled Audit Trails",
-                logs: [
-                    {
-                        type: "Automated Push",
-                        badgeClass: "bg-amber-500/10 text-amber-400 border border-amber-500/20",
-                        time: "Continuous 2025 Ledger Engine",
-                        title: "Systemic Ticket Dashboard Cleansing Cycles",
-                        summary: "Audit data documents 142 civil defect tickets — including unit seepage and structural fractures — marked 'Resolved' on the internal helpdesk system without any documented physical site repair or engineering field dispatch.",
-                        desc: "Data traces capture consistent instances of internal ticketing platforms mass-marking structural flaws as fixed without any real repairs.",
-                        from: "system-tracker@casagrand.co.in",
-                        to: "owners@gmail.com",
-                        searchTokens: "automated ticket closure dashboard structural seepage masonry cracks walkways fracture hydrostatic",
-                        evidence: "142 distinct civil defects (unit seepage, fractures) marked 'Resolved' without physical site verification.",
-                        escalationFailed: false
-                    }
-                ]
-            },
-            compliance: {
-                title: "Statutory Compliance & Handover Conflict Ledger",
-                meta: "Volume Target: 20 Enrolled Audit Trails",
-                logs: [
-                    {
-                        type: "Legal Escalation",
-                        badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
-                        time: "April 30, 2026",
-                        title: "200+ Signed Maintenance Fee Deferral Notice Served",
-                        summary: "Over 200 owners collectively served a deferral notice to the MD halting maintenance payments until WTP, STP, and perimeter specifications pass verification. Separately, handover documentation was found routed to the incorrect SRO office (Villivakkam).",
-                        desc: "Formal delivery of collective resident declarations halting ongoing maintenance financing pools until baseline tech specifications clear review.",
-                        from: "casagrandtudorowners@gmail.com",
-                        to: "md@casagrand.co.in",
-                        searchTokens: "maintenance freeze funding deferral signature legal notice sro villivakkam registry office",
-                        evidence: "200+ verified owners collectively withhold funding until WTP, STP, and perimeter parameters pass verification. Handover files traced to incorrect SRO office.",
-                        escalationFailed: false
-                    }
-                ]
-            }
-        };
-
-        let activeThreadKey = 'water';
-
-        function acceptDisclaimer() {
-            const modal = document.getElementById('disclaimerModal');
-            modal.style.opacity = '0';
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
+<script>
+    function acceptDisclaimer() {
+        const m = document.getElementById('disclaimerModal');
+        m.style.opacity = '0';
+        m.style.transition = 'opacity 0.3s';
+        setTimeout(() => m.style.display = 'none', 300);
+    }
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            const m = document.getElementById('disclaimerModal');
+            if (m && m.style.display !== 'none') acceptDisclaimer();
         }
+    });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const modal = document.getElementById('disclaimerModal');
-                if (modal && modal.style.display !== 'none') acceptDisclaimer();
-            }
+    const monthlyData = [
+        {m:"JUN'24",c:10},{m:"JUL'24",c:10},{m:"AUG'24",c:7},{m:"SEP'24",c:5},
+        {m:"OCT'24",c:11},{m:"NOV'24",c:6},{m:"DEC'24",c:2},
+        {m:"JAN'25",c:39},{m:"FEB'25",c:29},{m:"MAR'25",c:37},
+        {m:"APR'25",c:23},{m:"MAY'25",c:29},{m:"JUN'25",c:56},
+        {m:"JUL'25",c:30},{m:"AUG'25",c:28},{m:"SEP'25",c:53},
+        {m:"OCT'25",c:45},{m:"NOV'25",c:14},{m:"DEC'25",c:14},
+        {m:"JAN'26",c:6},{m:"FEB'26",c:16},{m:"MAR'26",c:11},
+        {m:"APR'26",c:13},{m:"MAY'26",c:6}
+    ];
+    const maxC = 56;
+
+    function barColor(c) {
+        if (c >= 50) return '#dc2626';
+        if (c >= 31) return '#ef4444';
+        if (c >= 16) return '#f97316';
+        if (c >= 6)  return '#d97706';
+        return '#475569';
+    }
+
+    function renderChart() {
+        const container = document.getElementById('monthlyChart');
+        const chartH = 172;
+        monthlyData.forEach(d => {
+            const pct = d.c / maxC;
+            const barH = Math.max(4, Math.round(pct * chartH));
+            const col = barColor(d.c);
+            const wrap = document.createElement('div');
+            wrap.className = 'bar-item flex flex-col items-center justify-end flex-1 relative cursor-default';
+            wrap.style.height = chartH + 28 + 'px';
+            wrap.innerHTML = `
+                <div class="bar-tip absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-700 text-white text-[9px] font-mono px-2 py-1 rounded whitespace-nowrap z-10 pointer-events-none">
+                    ${d.m}: ${d.c} emails
+                </div>
+                <div class="bar-fill w-full rounded-t" style="height:${barH}px;background:${col};transition:opacity 0.2s"></div>
+                <div class="text-[7.5px] font-mono text-slate-500 mt-1.5 text-center leading-none" style="width:100%">${d.m.replace("'",'<br>')}</div>
+            `;
+            wrap.addEventListener('mouseenter', () => wrap.querySelector('.bar-tip').style.display = 'block');
+            wrap.addEventListener('mouseleave', () => wrap.querySelector('.bar-tip').style.display = 'none');
+            container.appendChild(wrap);
         });
+    }
 
-        function readCell(message) {
-            const reader = document.getElementById('heatmap-reader');
-            reader.innerText = message;
-            reader.classList.add('text-amber-400', 'border-amber-900/60', 'bg-amber-950/20');
-        }
-
-        function clearCell() {
-            const reader = document.getElementById('heatmap-reader');
-            reader.innerText = "Hover over a matrix block to decode data files";
-            reader.classList.remove('text-amber-400', 'border-amber-900/60', 'bg-amber-950/20');
-        }
-
-        function switchThread(key) {
-            activeThreadKey = key;
-            const tabs = ['water', 'electrical', 'elevators', 'solar', 'parking', 'amenities', 'civil', 'compliance'];
-            tabs.forEach(t => {
-                const btn = document.getElementById(`btn-${t}`);
-                if (btn) {
-                    btn.className = t === key
-                        ? "w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-[#0a0f1e] text-white border-red-500/30 shadow-sm whitespace-nowrap font-semibold"
-                        : "w-full text-left px-4 py-3 rounded-xl transition-all duration-200 border bg-transparent text-slate-400 border-slate-900 hover:border-slate-800 whitespace-nowrap font-medium";
-                }
-            });
-            const target = threadDatabase[key];
-            document.getElementById('threadTitle').innerText = target.title;
-            document.getElementById('threadMeta').innerText = target.meta;
-            document.getElementById('auditSearch').value = '';
-            renderTimelineNodes(target.logs);
-        }
-
-        function renderTimelineNodes(logs) {
-            const container = document.getElementById('timelineContainer');
-            container.innerHTML = '';
-            if (logs.length === 0) {
-                container.innerHTML = `<div class="flex flex-col items-center justify-center py-12 text-center text-slate-500 font-mono text-xs space-y-2"><span>📭</span><span>No tracking records match your current search parameters.</span></div>`;
-                return;
-            }
-            logs.forEach((log, index) => {
-                const block = document.createElement('div');
-                block.className = "relative group opacity-0 translate-y-4";
-                block.style.animation = `slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.08}s forwards`;
-
-                const escalationBadge = log.escalationFailed
-                    ? `<span class="px-2.5 py-0.5 rounded text-[9px] font-bold tracking-widest uppercase bg-red-900/30 text-red-400 border border-red-800/40 font-mono">⚠ Escalation Unanswered</span>`
-                    : '';
-
-                block.innerHTML = `
-                    <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-900 border-4 border-[#030712] group-hover:bg-red-500 group-hover:border-red-950 transition-all duration-300"></div>
-                    <div class="bg-slate-950/30 border border-slate-900/80 hover:border-slate-800/80 rounded-2xl p-6 transition-all duration-300 space-y-4 shadow-sm backdrop-blur-sm">
-                        <div class="flex flex-wrap items-center justify-between gap-3">
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-2.5 py-0.5 rounded text-[9px] font-bold tracking-widest uppercase ${log.badgeClass} font-mono">${log.type}</span>
-                                ${escalationBadge}
-                            </div>
-                            <span class="text-xs font-medium text-slate-500 font-mono">${log.time}</span>
-                        </div>
-                        <div class="space-y-3">
-                            <h4 class="text-lg font-bold text-white tracking-tight font-display">${log.title}</h4>
-                            <div class="bg-slate-900/70 border border-slate-800/50 rounded-xl px-4 py-3">
-                                <p class="text-[10px] font-mono uppercase tracking-wider text-slate-500 mb-1.5">Key Finding</p>
-                                <p class="text-xs text-slate-300 leading-relaxed">${log.summary}</p>
-                            </div>
-                            <p class="text-sm text-slate-400 leading-relaxed">${log.desc}</p>
-                        </div>
-                        <div class="bg-slate-950/90 border border-slate-900 rounded-xl p-4 space-y-3 shadow-inner">
-                            <p class="text-xs text-slate-300 italic font-medium leading-relaxed">"${log.evidence}"</p>
-                            <div class="pt-2.5 text-[10px] text-slate-500 font-mono border-t border-slate-900/60 flex flex-wrap gap-x-4 gap-y-1">
-                                <div>From: <span class="text-slate-400">${log.from}</span></div>
-                                <div class="hidden sm:block text-slate-700">|</div>
-                                <div>To: <span class="text-slate-400">${log.to}</span></div>
-                            </div>
-                        </div>
-                    </div>`;
-                container.appendChild(block);
-            });
-        }
-
-        function filterAuditLogs() {
-            const query = document.getElementById('auditSearch').value.toLowerCase().trim();
-            const sourceLogs = threadDatabase[activeThreadKey].logs;
-            if (!query) { renderTimelineNodes(sourceLogs); return; }
-            const filtered = sourceLogs.filter(log =>
-                log.title.toLowerCase().includes(query) ||
-                log.desc.toLowerCase().includes(query) ||
-                log.evidence.toLowerCase().includes(query) ||
-                log.searchTokens.toLowerCase().includes(query)
-            );
-            renderTimelineNodes(filtered);
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            switchThread('water');
-        });
-    </script>
+    document.addEventListener('DOMContentLoaded', renderChart);
+</script>
 </body>
 </html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#030712] text-slate-100 antialiased scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudor Transparency Ledger | Escalations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans:['Inter','sans-serif'],
+                        display:['Cabinet Grotesk','sans-serif'],
+                        mono:['JetBrains Mono','monospace']
+                    },
+                    animation:{'pulse-slow':'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite'}
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar{width:6px;height:6px}
+        ::-webkit-scrollbar-track{background:#030712}
+        ::-webkit-scrollbar-thumb{background:#1f2937;border-radius:9999px}
+        .glass-panel{background:rgba(10,15,30,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+    </style>
+</head>
+<body class="min-h-screen pb-40 selection:bg-red-500/30 selection:text-red-300">
+<div class="w-full h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-red-600"></div>
+
+<nav class="sticky top-0 z-50 bg-[#030712]/80 backdrop-blur-md border-b border-gray-900/60 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse-slow"></span>
+            <span class="text-xs font-mono tracking-widest uppercase text-slate-400">Tudor Transparency Ledger</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs font-mono">
+            <a href="index.html" class="text-slate-400 hover:text-white transition">Overview</a>
+            <a href="matrix.html" class="text-slate-400 hover:text-white transition">Delay Matrix</a>
+            <a href="escalations.html" class="text-white font-bold border-b border-red-500 pb-0.5">Escalations</a>
+            <a href="pillars.html" class="text-slate-400 hover:text-white transition">Infrastructure Pillars</a>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-6 mt-12 sm:mt-16 space-y-16">
+
+    <header class="space-y-2 max-w-3xl">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-red-500/10 text-red-400 border border-red-500/20 rounded-md font-mono">Documented From Email Records Only</span>
+        <h1 class="text-3xl sm:text-5xl font-black font-display tracking-tight text-white">Failed Escalations &amp; Non-Responses</h1>
+        <p class="text-sm text-slate-400">The following instances are explicitly documented in the audit email records. Each entry reflects a formal escalation that received no substantive response, or a systemic administrative action used in place of genuine resolution.</p>
+    </header>
+
+    <!-- Escalation Cards -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+        <div class="bg-red-950/20 border border-red-900/30 rounded-2xl p-6 space-y-3">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 animate-pulse-slow"></span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-red-400 font-bold">Zero Response — May 2024</span>
+            </div>
+            <h4 class="text-base font-bold text-white">12 Formal WTP Blueprint Emails — 0 Responses Received</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">12 outreach emails were formally sent to <span class="font-mono text-slate-300">icare@casagrand.co.in</span> regarding Water Treatment Plant blueprint discrepancies. Per the audit record, zero responses were received to any of these 12 emails.</p>
+            <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-3 text-[10px] font-mono text-slate-500">
+                <span class="text-slate-400">Category:</span> Water Infrastructure &nbsp;|&nbsp;
+                <span class="text-slate-400">Filed:</span> May 2024 &nbsp;|&nbsp;
+                <span class="text-slate-400">Response on record:</span> <span class="text-red-400">None</span>
+            </div>
+        </div>
+
+        <div class="bg-amber-950/20 border border-amber-900/30 rounded-2xl p-6 space-y-3">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0"></span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">Template Stall — July 17, 2024</span>
+            </div>
+            <h4 class="text-base font-bold text-white">WTP Audit Request Met With Holding Template — No Technical Revert</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">The formal WTP specification discrepancy filed July 11, 2024 received a holding template response six days later. No substantive technical revert or site inspection report is documented in the audit record thereafter.</p>
+            <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-3 space-y-1.5">
+                <p class="text-xs text-slate-300 italic">"Kindly give us some time for our internal discussion based on the site audit report… will revert shortly."</p>
+                <div class="text-[10px] font-mono text-slate-500 border-t border-slate-900 pt-1.5">
+                    <span class="text-slate-400">From:</span> icare@casagrand.co.in &nbsp;|&nbsp; <span class="text-slate-400">Substantive revert:</span> <span class="text-red-400">Not found in audit</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-amber-950/20 border border-amber-900/30 rounded-2xl p-6 space-y-3">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0"></span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">No Response on Record — Jan 19, 2025</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Elevator Safety Certification Escalation — Escalation Desk, No Reply</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">A formal compliance escalation regarding missing elevator safety certificates and Block F sudden levelling drops was directed to <span class="font-mono text-slate-300">escalationdesk@casagrand.co.in</span>. No response to this escalation is present in the audit record.</p>
+            <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-3 text-[10px] font-mono text-slate-500">
+                <span class="text-slate-400">Category:</span> Elevator Safety &nbsp;|&nbsp;
+                <span class="text-slate-400">Filed:</span> January 19, 2025 &nbsp;|&nbsp;
+                <span class="text-slate-400">Response on record:</span> <span class="text-red-400">None</span>
+            </div>
+        </div>
+
+        <div class="bg-red-950/20 border border-red-900/30 rounded-2xl p-6 space-y-3">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-red-400 font-bold">Systemic Non-Resolution — Continuous 2025</span>
+            </div>
+            <h4 class="text-base font-bold text-white">142 Civil Defect Tickets Closed Without Physical Verification</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">Audit data documents 142 distinct civil defects — including unit seepage and structural fractures — marked 'Resolved' on the internal helpdesk platform without any documented physical site repair or field dispatch on record.</p>
+            <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-3 text-[10px] font-mono text-slate-500">
+                <span class="text-slate-400">Category:</span> Civil Defects &nbsp;|&nbsp;
+                <span class="text-slate-400">Period:</span> 2025 &nbsp;|&nbsp;
+                <span class="text-slate-400">Physical repair verified:</span> <span class="text-red-400">Not found in audit</span>
+            </div>
+        </div>
+
+        <div class="bg-red-950/20 border border-red-900/30 rounded-2xl p-6 space-y-3">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 animate-pulse-slow"></span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-red-400 font-bold">Repeated Escalation — May 2025 & Oct 2025</span>
+            </div>
+            <h4 class="text-base font-bold text-white">DG Exhaust Health Hazard — Filed Twice, No Documented Resolution</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">A health hazard regarding Millenia DG exhaust fumes was formally raised in May 2025. A re-escalation was filed in October 2025. No resolution or acknowledgement from @casagrand.co.in is documented in the audit record across either filing.</p>
+            <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-3 text-[10px] font-mono text-slate-500">
+                <span class="text-slate-400">Category:</span> Fire & Safety &nbsp;|&nbsp;
+                <span class="text-slate-400">Filed:</span> May 2025, Oct 2025 &nbsp;|&nbsp;
+                <span class="text-slate-400">Response on record:</span> <span class="text-red-400">None</span>
+            </div>
+        </div>
+
+        <div class="bg-amber-950/20 border border-amber-900/30 rounded-2xl p-6 space-y-3">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0"></span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">Unanswered — Nov 2025</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Fire Incident in C Block — Formal Clarification Request Unanswered</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">A formal email requesting clarification and remedial action following a fire incident in C Block was filed in November 2025. No response from @casagrand.co.in is recorded in the audit for this filing.</p>
+            <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-3 text-[10px] font-mono text-slate-500">
+                <span class="text-slate-400">Category:</span> Fire & Safety &nbsp;|&nbsp;
+                <span class="text-slate-400">Filed:</span> November 2025 &nbsp;|&nbsp;
+                <span class="text-slate-400">Response on record:</span> <span class="text-red-400">None</span>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Accountability Chain -->
+    <section class="glass-panel border border-slate-900/60 rounded-3xl p-6 sm:p-8 space-y-8">
+        <div class="space-y-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-purple-400 font-bold bg-purple-500/10 px-2.5 py-1 rounded">From Formal Email To/CC Fields — Source Audit</span>
+            <h3 class="text-2xl font-bold tracking-tight text-white font-display">Casagrand Staff Accountability Chain</h3>
+            <p class="text-xs text-slate-400">The following table lists all Casagrand email addresses that received owner emails across the audit period, ranked by volume. Individual staff names are aliased. Role-based addresses (md, icare, escalationdesk) are shown as-is. Zero replies are confirmed by cross-referencing @casagrand.co.in senders across all 779 emails.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Summary stats -->
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-950/60 border border-slate-900 rounded-2xl p-4 space-y-1">
+                        <div class="text-[10px] font-mono uppercase text-slate-500">Unique CG Staff Emailed</div>
+                        <div class="text-3xl font-bold font-mono text-purple-400">64</div>
+                    </div>
+                    <div class="bg-slate-950/60 border border-slate-900 rounded-2xl p-4 space-y-1">
+                        <div class="text-[10px] font-mono uppercase text-slate-500">Total Email Instances</div>
+                        <div class="text-3xl font-bold font-mono text-amber-400">3,644</div>
+                    </div>
+                    <div class="bg-red-950/30 border border-red-900/30 rounded-2xl p-4 space-y-1">
+                        <div class="text-[10px] font-mono uppercase text-slate-500">Staff Who Replied</div>
+                        <div class="text-3xl font-bold font-mono text-red-500">2</div>
+                        <div class="text-[10px] text-slate-500 font-mono">Once each, June 2024</div>
+                    </div>
+                    <div class="bg-red-950/30 border border-red-900/30 rounded-2xl p-4 space-y-1">
+                        <div class="text-[10px] font-mono uppercase text-slate-500">Staff With 0 Replies</div>
+                        <div class="text-3xl font-bold font-mono text-red-500">62</div>
+                        <div class="text-[10px] text-slate-500 font-mono">Across all 24 months</div>
+                    </div>
+                </div>
+                <div class="bg-slate-950/60 border border-slate-900 rounded-2xl p-4 space-y-2">
+                    <div class="text-[10px] font-mono uppercase text-slate-500">Note on Aliasing</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Individual staff names in @casagrand.co.in addresses are replaced with aliases (staff1 through staff64) ranked by emails received. Institutional and role-based addresses (md, icare, escalationdesk, etc.) are shown unmodified.</p>
+                </div>
+            </div>
+
+            <!-- Full table -->
+            <div class="space-y-2">
+                <div class="text-xs font-mono uppercase text-slate-500 tracking-wider pb-2 border-b border-slate-900">All Casagrand Recipients — Ranked by Emails Received</div>
+                <div class="space-y-1 text-xs font-mono max-h-[500px] overflow-y-auto pr-1" style="scrollbar-width:thin">
+                    <div class="grid grid-cols-12 gap-2 text-[9px] uppercase text-slate-600 font-bold px-2 pb-1">
+                        <div class="col-span-7">Recipient</div>
+                        <div class="col-span-3 text-right">Emails Received</div>
+                        <div class="col-span-2 text-center">Reply</div>
+                    </div>
+                    <!-- All 20 rows -->
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff1@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">417</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">md@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">305</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff2@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">274</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff3@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">241</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff4@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">238</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff5@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">184</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff6@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">173</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff7@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">168</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff8@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">165</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">escalationdesk@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">148</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff9@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">144</div><div class="col-span-2 text-center text-emerald-500 font-bold">1*</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">icare@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">142</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff10@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">140</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff11@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">115</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff12@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">95</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff13@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">94</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff14@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">91</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff15@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">61</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff16@casagrand.co.in</div><div class="col-span-3 text-right text-amber-400">51</div><div class="col-span-2 text-center text-emerald-500 font-bold">1*</div></div>
+                    <div class="grid grid-cols-12 gap-2 items-center px-2 py-1.5 rounded bg-slate-950/40 border border-slate-900/40"><div class="col-span-7 text-slate-300">staff17–64@casagrand.co.in</div><div class="col-span-3 text-right text-slate-500">≤50 each</div><div class="col-span-2 text-center text-red-500 font-bold">0</div></div>
+                </div>
+                <p class="text-[10px] text-slate-600 font-mono pt-1">* staff9 and staff16 each sent 1 reply in June 2024 (same thread). 62 of 64 staff: zero replies on record.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>
