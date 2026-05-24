@@ -79,10 +79,13 @@
         </div>
 
         <!-- Timeline panel -->
-        <div class="lg:col-span-3 glass-panel border border-slate-900/60 rounded-3xl p-6 sm:p-8 space-y-8">
-            <div class="border-b border-slate-900 pb-5 space-y-1">
-                <h3 id="threadTitle" class="text-2xl font-bold tracking-tight text-white font-display">Water Infrastructure & Core Treatment Utility</h3>
-                <p id="threadMeta" class="text-xs text-slate-400 font-mono">83 water-related owner emails on record across 24 months</p>
+        <div class="lg:col-span-3 glass-panel border border-slate-900/60 rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="border-b border-slate-900 pb-5 space-y-3">
+                <div>
+                    <h3 id="threadTitle" class="text-2xl font-bold tracking-tight text-white font-display">Water Infrastructure & Core Treatment Utility</h3>
+                    <p id="threadMeta" class="text-xs text-slate-500 font-mono mt-0.5"></p>
+                </div>
+                <div id="categoryStats"></div>
             </div>
             <div id="timelineContainer" class="relative border-l border-slate-900 ml-4 pl-6 space-y-8"></div>
         </div>
@@ -94,7 +97,8 @@
     const threadDatabase = {
         water: {
             title: "Water Infrastructure & Core Treatment Utility",
-            meta: "83 water-related owner emails on record across 24 months",
+            meta: "90 owner emails · 5 CG replies · 6% response rate · 57 escalations",
+            stats: {ownerEmails:90,cgReplies:5,responseRate:"6%",escalations:57,firstEmail:"14 Jun 2024",lastOwnerEmail:"01 Apr 2026",lastCGReply:"02 Apr 2026"},
             logs: [
                 {type:"Owner Initiation",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"May 2024",title:"12 Unanswered Outreach Emails — WTP Blueprint Discrepancies",summary:"12 outreach emails sent to icare@casagrand.co.in regarding Water Treatment Plant blueprint discrepancies. Zero responses received to any of the 12 emails per the audit record.",desc:"Formal baseline audit launched regarding missing carbon media filtration assets within the core Water Treatment Plant structure.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Completion of Tudor Project – WTP, RO (Not done as required / mentioned in the brochure)",escalationFailed:true},
                 {type:"Owner Initiation",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"July 11, 2024",title:"WTP Specification Discrepancy Formally Filed",summary:"Owner formally raised that the installed WTP lacks carbon media filtration specified in promotional blueprints. This followed 12 prior unanswered emails in May 2024.",desc:"Formal filing regarding missing carbon media filtration — gap between promotional blueprints and actual site installation.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Re: Completion of Tudor Project – WTP, RO (Not done as required / mentioned in the brochure)",escalationFailed:true},
@@ -106,7 +110,8 @@
         },
         electrical: {
             title: "Electrical Grid Integration & DG Overheads",
-            meta: "22 electrical-related owner emails | Jan 2025 → Oct 2025",
+            meta: "17 owner emails · 3 CG replies · 18% response rate · 5 escalations",
+            stats: {ownerEmails:17,cgReplies:3,responseRate:"18%",escalations:5,firstEmail:"06 Oct 2024",lastOwnerEmail:"06 Oct 2025",lastCGReply:"24 Jun 2025"},
             logs: [
                 {type:"Builder Notification",badge:"bg-purple-500/10 text-purple-400 border border-purple-500/20",time:"October 12, 2024",title:"TNEB Substation Transformer Deferral Notified",summary:"Builder notified residents that permanent substation layout clearances are pending. Units were declared 'ready' under temporary grid connections — meaning permanent electrical infrastructure was incomplete at handover.",desc:"Engineering team relayed an indefinite delay in finalising layout clearances for the permanent TNEB substation.",from:"associationdesk@casagrand.co.in",to:"casagrandtudorowners@gmail.com",subject:"MOM on 10/05 meeting on Water and EB",evidence:'"The permanent transformer layout requires further clearances. Units are declared ready under temporary operational terms."',escalationFailed:false},
                 {type:"Financial Shift",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"October–November 2024",title:"Mandatory DG Fuel Charges Imposed on Residents",summary:"Due to the deferred permanent grid, recurring monthly diesel generator fuel charges were imposed directly on residents — transferring the cost of an incomplete infrastructure commitment to occupants.",desc:"Builder transfers recurring backup diesel fuel expenses to residents due to permanent grid layout deferrals.",from:"icare@casagrand.co.in",to:"casagrandtudorowners@gmail.com",subject:"EB Connection — Charges Notification",evidence:'"Fixed monthly Diesel Generator fees applied (BHK configuration scale) to cross-subsidize backup overheads."',escalationFailed:false},
@@ -116,7 +121,8 @@
         },
         elevators: {
             title: "Vertical Transportation & Elevator Safety Logs",
-            meta: "27 elevator-related owner emails on record across 24 months",
+            meta: "28 owner emails · 1 CG reply · 4% response rate · 20 escalations",
+            stats: {ownerEmails:28,cgReplies:1,responseRate:"4%",escalations:20,firstEmail:"10 Jan 2025",lastOwnerEmail:"30 Apr 2026",lastCGReply:"22 Sep 2025"},
             logs: [
                 {type:"Safety Incident",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"July 29, 2024",title:"Block C ARD Failure — Emergency Shaft Trap Incident",summary:"An Automatic Rescue Device failure in Block C trapped residents inside a stalled lift shaft. Emergency buttons failed to signal support teams. A holding template was issued in August for load calibration — no substantive resolution documented.",desc:"Critical trap incident filed following ARD breakdown in Block C shaft.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Re: Reg. Update on Well Digging, WTP, and Lift AMC Status",evidence:'"A dangerous ARD failing sequence trapped residents inside Block C shaft… Emergency buttons failed to signal support teams."',escalationFailed:false},
                 {type:"Safety Alert",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"January 19, 2025",title:"Missing Safety Certificates & Block F Levelling Drops — Escalation Desk",summary:"Lifts in Block F reported sudden levelling drops, operating without valid safety display certificates or load capacity tags. Escalation directed to escalationdesk@casagrand.co.in — no response documented in audit record.",desc:"Formal compliance escalation filed regarding missing elevator safety certificates across multiple blocks.",from:"casagrandtudorowners@gmail.com",to:"escalationdesk@casagrand.co.in",subject:"Reg. Urgent Attention Required – Lift Issues Across Blocks",evidence:'"Lifts are running without valid safety display logs. Block F has experienced sudden levelling drops between floor basements."',escalationFailed:true},
@@ -126,7 +132,8 @@
         },
         solar: {
             title: "Solar Grid Infrastructure & Capacity Deficits",
-            meta: "1 direct solar-related owner email on record; referenced in multiple governance threads",
+            meta: "1 direct owner email · 0 CG replies · 0% response rate · referenced in governance threads",
+            stats: {ownerEmails:1,cgReplies:0,responseRate:"0%",escalations:0,firstEmail:"10 Jan 2025",lastOwnerEmail:"10 Jan 2025",lastCGReply:"Never"},
             logs: [
                 {type:"Owner Evaluation",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"September 2024",title:"Common Area Solar kW Output Deficit Formally Filed",summary:"Residents filed engineering calculations showing installed rooftop solar panels do not meet the kW output promised in marketing materials for common area net metering. No substantive response documented.",desc:"Engineering calculation audit submitted tracing a major deficiency in rooftop PV panels relative to promised marketing layouts.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"EB & Solar update",evidence:'"Installed panels do not meet the promised total kW output required to run common area net-metering loops."',escalationFailed:true},
                 {type:"Owner Escalation",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"October 2024",title:"Common Area Solar Generation Shortfall — Formal Deflections",summary:"Common area solar generation shortfall raised formally. October 2024 builder notifications provided deflections rather than substantive technical resolution.",desc:"Solar generation shortfall copied to broader community governance correspondence.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Solar generation shortfall",escalationFailed:true},
@@ -135,7 +142,8 @@
         },
         parking: {
             title: "Parking Allotment, Access & Undelivered Commitments",
-            meta: "61 parking-related owner emails | Dec 2024 → May 2026",
+            meta: "75 owner emails · 5 CG replies · 7% response rate · 60 escalations",
+            stats: {ownerEmails:75,cgReplies:5,responseRate:"7%",escalations:60,firstEmail:"17 Jul 2024",lastOwnerEmail:"20 May 2026",lastCGReply:"26 Aug 2025"},
             logs: [
                 {type:"Allotment Error",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"June 2024",title:"Allocation Boundary Violations & Width Deficiencies",summary:"Parking spaces found below booking specification dimensions. Structural concrete pillars obstruct vehicle entry and door clearance. No documented resolution in audit record.",desc:"Discrepancy notice filed: spaces below booking sq.ft., structural pillars obstruct entry.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Reg. Clarification Request – Car Parking Allotment Process",escalationFailed:false},
                 {type:"Drainage Alert",badge:"bg-amber-500/10 text-amber-400 border border-amber-500/20",time:"September 2024",title:"Low Ceiling Clearance & Basement Water Pooling",summary:"Basement ceiling clearance below standard for mid-to-large SUVs. Driveway slope grading causes persistent stagnant water pooling near structural walls.",desc:"Formal ticket: low overhead clearance for large vehicles, flat driveway slope creates pooling.",from:"casagrandtudorowners@gmail.com",to:"associationdesk@casagrand.co.in",subject:"Reg. Request for Access Solution to F Block Stilt Car Parking",escalationFailed:false},
@@ -146,7 +154,8 @@
         },
         amenities: {
             title: "Common Amenities & Leisure Infrastructure Tracker",
-            meta: "7 amenity-related owner emails | Jan 2025 → Mar 2026",
+            meta: "19 owner emails · 5 CG replies · 26% response rate · 6 escalations",
+            stats: {ownerEmails:19,cgReplies:5,responseRate:"26%",escalations:6,firstEmail:"14 Oct 2024",lastOwnerEmail:"16 Mar 2026",lastCGReply:"16 Mar 2026"},
             logs: [
                 {type:"Omission Filing",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"September 2024",title:"Clubhouse Incompletion & Uncertified Play Equipment",summary:"At time of filing: clubhouse interiors unfinished, children's play equipment lacking safety certificates, pool filtration and CCTV security loops not installed.",desc:"Formal checklist filed: unpainted clubhouse interiors, uncertified playground fixtures, uninstalled security loops.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Reg. Unfinished Clubhouse and Common Amenities",escalationFailed:false},
                 {type:"Owner Filing",badge:"bg-amber-500/10 text-amber-400 border border-amber-500/20",time:"November 2024",title:"Pool Filtration Failures & CCTV Omissions Logged",summary:"Pool filtration system failures and CCTV security loop gaps formally logged in November 2024.",desc:"Follow-up to September 2024 filing — pool and security gaps still unresolved.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Pool filtration and CCTV — follow up",escalationFailed:false},
@@ -157,7 +166,8 @@
         },
         civil: {
             title: "Common Area Structural Deficiencies & Seepage Logs",
-            meta: "16 civil defect owner emails | Aug 2025 → Nov 2025",
+            meta: "11 owner emails · 0 CG replies · 0% response rate · 11 escalations",
+            stats: {ownerEmails:11,cgReplies:0,responseRate:"0%",escalations:11,firstEmail:"03 Sep 2025",lastOwnerEmail:"10 Nov 2025",lastCGReply:"Never"},
             logs: [
                 {type:"Initial Filing",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"June 2024",title:"Core Wall Fractures & Walkway Masonry Faults Lodged",summary:"Structural deficiencies including wall fractures and walkway masonry faults formally lodged in June 2024. No documented resolution in audit record.",desc:"Formal notice of common area civil defects including wall fractures and masonry issues.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Civil defects — wall fractures and walkway issues",escalationFailed:false},
                 {type:"Systemic Finding",badge:"bg-amber-500/10 text-amber-400 border border-amber-500/20",time:"January–February 2025",title:"142 Tickets Marked Resolved Without Physical Repair",summary:"Audit data documents 142 civil defect tickets — seepage, fractures, structural issues — marked 'Resolved' on the internal helpdesk platform without any documented physical site repair or field dispatch.",desc:"Systemic pattern: tickets auto-closed on platform without on-site verification.",from:"system@casagrand.co.in",to:"owners",subject:"Ticket closure notifications",evidence:'"142 distinct civil defects (unit seepage, fractures) marked Resolved without physical site verification."',escalationFailed:false},
@@ -167,7 +177,8 @@
         },
         compliance: {
             title: "Statutory Compliance, Handover & Governance Conflicts",
-            meta: "63 compliance-related owner emails | Jan 2025 → Apr 2026",
+            meta: "132 owner emails · 12 CG replies · 9% response rate · 43 escalations",
+            stats: {ownerEmails:132,cgReplies:12,responseRate:"9%",escalations:43,firstEmail:"26 Jun 2024",lastOwnerEmail:"16 May 2026",lastCGReply:"18 Apr 2026"},
             logs: [
                 {type:"IFM Dispute",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"January 2025",title:"IFM Deferral Requested — Infrastructure Pre-Conditions Not Met",summary:"Owners formally requested deferral of IFM (Integrated Facility Management) takeover until WTP, STP, elevators, solar, and perimeter infrastructure meet committed specifications.",desc:"Subject: 'Clarification on IFM' and 'Reg. Request to Defer IFM Entry Until Completion of Promised Infrastructure'.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Clarification on IFM",escalationFailed:false},
                 {type:"Handover Dispute",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"July 2025",title:"Apartment Handover Delays — B711 & G506 Formally Escalated",summary:"Formal escalations regarding unacceptable delays in apartment handover for units B711 and G506. Subjects explicitly titled 'Unacceptable Delay in Handover' and 'Urgent: Request for Immediate Action'.",desc:"Subjects: 'Urgent: Unacceptable Delay in Handover of Apartment - casagrand tudor B711 – Request for Immediate Action'.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Urgent: Unacceptable Delay in Handover of Apartment - casagrand tudor B711 – Request for Immediate Action",escalationFailed:true},
@@ -177,7 +188,8 @@
         },
         fire: {
             title: "Fire Safety & Health Hazards",
-            meta: "3 fire/safety-related owner emails on record — all unanswered",
+            meta: "4 owner emails · 0 CG replies · 0% response rate · 4 escalations",
+            stats: {ownerEmails:4,cgReplies:0,responseRate:"0%",escalations:4,firstEmail:"05 May 2025",lastOwnerEmail:"01 Dec 2025",lastCGReply:"Never"},
             logs: [
                 {type:"Health Hazard",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"May 2025",title:"Millenia DG Exhaust Fumes — Health Hazard Formally Filed",summary:"A formal health hazard notice regarding Millenia diesel generator exhaust fumes affecting residents was filed in May 2025. No @casagrand.co.in response documented.",desc:"Subject: 'Reg. Immediate Attention Required – Health Hazard Due to Millenia DG Exhaust Fumes'.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Reg. Immediate Attention Required – Health Hazard Due to Millenia DG Exhaust Fumes",escalationFailed:true},
                 {type:"Re-Escalation",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"October 2025",title:"DG Exhaust Health Hazard Re-Escalated — Second Filing",summary:"The Millenia DG exhaust health hazard was re-escalated in October 2025 with no documented resolution or acknowledgement from @casagrand.co.in between the May 2025 and October 2025 filings.",desc:"Subject: 'Re: Reg. Immediate Attention Required – Health Hazard Due to Millenia DG Exhaust Fumes'.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Re: Reg. Immediate Attention Required – Health Hazard Due to Millenia DG Exhaust Fumes",escalationFailed:true},
@@ -186,7 +198,8 @@
         },
         security: {
             title: "Security, Surveillance & Premises Safety",
-            meta: "11 security-related owner emails | May 2025 → Apr 2026",
+            meta: "15 owner emails · 3 CG replies · 20% response rate · 11 escalations",
+            stats: {ownerEmails:15,cgReplies:3,responseRate:"20%",escalations:11,firstEmail:"29 Jan 2025",lastOwnerEmail:"08 Apr 2026",lastCGReply:"18 Apr 2026"},
             logs: [
                 {type:"Owner Filing",badge:"bg-amber-500/10 text-amber-400 border border-amber-500/20",time:"March 2025",title:"Stray Dog Menace — Access Concern Filed",summary:"Stray dog menace within the premises formally reported in March 2025. No documented resolution in audit record.",desc:"Subject: 'Dog Menace'.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Dog Menace",escalationFailed:false},
                 {type:"Safety Alert",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"June 2025",title:"Snake Sighting in Car Parking — Preventive Measures Requested",summary:"A snake sighting in the car parking area was formally reported with a request for preventive measures. No @casagrand.co.in response documented.",desc:"Subject: 'Reg. Urgent: Snake Sighting in Car Parking – Request for Preventive Measures'.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Reg. Urgent: Snake Sighting in Car Parking – Request for Preventive Measures",escalationFailed:true},
@@ -197,7 +210,8 @@
         },
         governance: {
             title: "Governance: AOA Formation, IFM & Resident Coordination",
-            meta: "110 governance-related owner emails | Aug 2024 → Dec 2025",
+            meta: "202 owner emails · 28 CG replies · 14% response rate · 70 escalations",
+            stats: {ownerEmails:202,cgReplies:28,responseRate:"14%",escalations:70,firstEmail:"05 Jun 2024",lastOwnerEmail:"16 Mar 2026",lastCGReply:"16 Mar 2026"},
             logs: [
                 {type:"Owner Coordination",badge:"bg-purple-500/10 text-purple-400 border border-purple-500/20",time:"August 2024",title:"Project Delay Meeting & Aug 31 Resident Agenda",summary:"Owner-organised meeting on August 31, 2024 to coordinate responses to project delays on water, electrical, and overall handover. 5 emails in August coordinating the agenda.",desc:"Subjects: 'Re: TUDOR PROJECT : Meeting on Project delay and Water issues', 'Agenda for Saturday meeting, 31st Aug 2024'.",from:"casagrandtudorowners@gmail.com",to:"casagrandtudorowners@gmail.com",subject:"Agenda for Saturday meeting, 31st Aug 2024",escalationFailed:false},
                 {type:"IFM Dispute",badge:"bg-red-500/10 text-red-400 border border-red-500/20",time:"January 2025",title:"18 Governance Emails — IFM, AOA, Compliance Coordination",summary:"18 governance-related owner emails in January 2025 — the single highest monthly volume for this category. Topics: IFM conditions, AOA formation, compliance timelines, meeting requests with Casagrand.",desc:"Subjects include: 'Clarification on IFM', 'Reg. Request for Meeting with Owners at Casagrand Tudor'.",from:"casagrandtudorowners@gmail.com",to:"icare@casagrand.co.in",subject:"Clarification on IFM",escalationFailed:false},
@@ -223,6 +237,38 @@
         const target = threadDatabase[key];
         document.getElementById('threadTitle').textContent = target.title;
         document.getElementById('threadMeta').textContent = target.meta;
+
+        const s = target.stats;
+        const rateNum = parseInt(s.responseRate);
+        const rateCol = rateNum === 0 ? 'text-red-500' : rateNum < 10 ? 'text-red-400' : rateNum < 20 ? 'text-amber-400' : 'text-emerald-400';
+        const cgCol = s.lastCGReply === 'Never' ? 'text-red-500' : 'text-slate-200';
+        const neverBadge = s.lastCGReply === 'Never'
+            ? `<span class="inline-block px-1.5 py-0.5 bg-red-900/40 text-red-400 rounded text-[9px] font-bold uppercase font-mono tracking-widest">Never</span>`
+            : `<span class="${cgCol}">${s.lastCGReply}</span>`;
+        document.getElementById('categoryStats').innerHTML = `
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div class="bg-slate-950/70 border border-slate-900 rounded-xl p-3">
+                    <div class="text-[9px] uppercase font-bold text-slate-500 tracking-wider font-mono">Owner Emails</div>
+                    <div class="text-2xl font-black text-amber-400 font-mono mt-0.5">${s.ownerEmails}</div>
+                    <div class="text-[9px] text-slate-600 font-mono mt-0.5">${s.firstEmail} → ${s.lastOwnerEmail}</div>
+                </div>
+                <div class="bg-slate-950/70 border border-slate-900 rounded-xl p-3">
+                    <div class="text-[9px] uppercase font-bold text-slate-500 tracking-wider font-mono">CG Replies</div>
+                    <div class="text-2xl font-black ${rateCol} font-mono mt-0.5">${s.cgReplies} <span class="text-sm font-medium">(${s.responseRate})</span></div>
+                    <div class="text-[9px] text-slate-600 font-mono mt-0.5">of ${s.ownerEmails} owner emails</div>
+                </div>
+                <div class="bg-slate-950/70 border border-slate-900 rounded-xl p-3">
+                    <div class="text-[9px] uppercase font-bold text-slate-500 tracking-wider font-mono">Escalations</div>
+                    <div class="text-2xl font-black text-purple-400 font-mono mt-0.5">${s.escalations}</div>
+                    <div class="text-[9px] text-slate-600 font-mono mt-0.5">emails to md@ / escalationdesk@</div>
+                </div>
+                <div class="bg-slate-950/70 border border-slate-900 rounded-xl p-3">
+                    <div class="text-[9px] uppercase font-bold text-slate-500 tracking-wider font-mono">Last CG Reply</div>
+                    <div class="text-sm font-bold mt-1 font-mono">${neverBadge}</div>
+                    <div class="text-[9px] text-slate-600 font-mono mt-0.5">last documented response</div>
+                </div>
+            </div>`;
+
         document.getElementById('auditSearch').value = '';
         renderTimeline(target.logs);
     }
